@@ -1,0 +1,83 @@
+name: divisioniosfinal
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.4
+
+environment:
+  sdk: '>=2.18.2 <3.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.2
+  flutter_screenutil: ^5.4.0+1
+  get: any
+  http: any
+  flutter_svg: any
+  fluttertoast: any
+  flutter_staggered_grid_view: ^0.4.1
+  connectivity_plus: any
+  shared_preferences: any
+  flutter_html: ^2.2.1
+  image_picker: ^0.8.5+3
+  image_cropper: ^2.0.3
+  dio: any
+  cached_network_image: any
+  intl: any
+  url_launcher: any
+  lottie: any
+  excel: any
+  open_filex: ^4.3.2
+  path_provider: any
+  path: any
+  pdf: any
+  firebase_core: any
+  firebase_messaging: any
+  flutter_local_notifications: any
+  flutter_spinkit: any
+  loading_progress: any
+  permission_handler: any
+  flutter_pdfview: any
+  flutter_inappwebview: any
+  rxdart: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.11.0
+
+flutter_icons:
+  android: true
+  ios: false
+  image_path: "assets/images/dlogo.png"
+  remove_alpha_ios: true
+  min_sdk_android: 21
+
+flutter:
+
+  uses-material-design: true
+  assets:
+   - assets/images/
+   - assets/lottie/
+  fonts:
+    - family: Gotham
+      fonts:
+        - asset: assets/fonts/GothamMedium.ttf
+          weight: 500
+    - family: Fake Receipt
+      fonts:
+        - asset: assets/fonts/fake_receipt.ttf
+          weight: 400
+    - family: HydrogenType
+      fonts:
+        - asset: assets/fonts/hydrogen.ttf
+          weight: 400
+    - family: DIN Next LT Arabic Light
+      fonts:
+        - asset: assets/fonts/DIN Next LT Arabic Light.ttf
+
