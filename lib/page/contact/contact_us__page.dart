@@ -1,6 +1,7 @@
 import 'dart:math';
 
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,7 +19,7 @@ import '../account/account_controller.dart';
 import '../widget/balance_widget.dart';
 import '../widget/empty_failure_no_internet_view.dart';
 import 'contact_controller.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ContactUsPage extends StatefulWidget {
   const ContactUsPage({Key? key}) : super(key: key);
 
@@ -82,8 +83,8 @@ class _FAQPageState extends State<ContactUsPage>{
       await launchUrl(whatsapp);
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("WhatsApp is not installed on the device"),
+         SnackBar(
+          content: Text("whatsappIsNotInstalledOnTheDevice").tr(),
         ),
       );
     }
@@ -133,7 +134,7 @@ class _FAQPageState extends State<ContactUsPage>{
                         onPressed: (){
                           Navigator.of(context).pop();
                         },),
-                      Text("Contact",style: productPageTitleTextStyle,),
+                      Text("contact",style: productPageTitleTextStyle,).tr(),
                       SizedBox(height: 20,width: 50,)
                     ],
                   ),
@@ -151,9 +152,9 @@ class _FAQPageState extends State<ContactUsPage>{
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/no_internet_lottie.json',
-                          title: 'Internet Error',
-                          description: 'Internet not found',
-                          buttonText: "Retry",
+                          title: 'internetError',
+                          description: 'internetNotFound',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getContactInfo(true);
                           },
@@ -164,9 +165,9 @@ class _FAQPageState extends State<ContactUsPage>{
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/no_internet_lottie.json',
-                          title: 'Internet Error',
-                          description: 'Internet not found',
-                          buttonText: "Retry",
+                          title: 'internetError',
+                          description: 'internetNotFound',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getContactInfo(true,);
                           },
@@ -177,9 +178,9 @@ class _FAQPageState extends State<ContactUsPage>{
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/failure_lottie.json',
-                          title: 'Server error'.tr,
-                          description: 'Please try again later',
-                          buttonText: "Retry",
+                          title: 'serverError',
+                          description: 'pleaseTryAgainLater',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getContactInfo(true);
                           },
@@ -190,9 +191,9 @@ class _FAQPageState extends State<ContactUsPage>{
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/failure_lottie.json',
-                          title: 'Something went wrong',
-                          description: 'Please try again later',
-                          buttonText: "Retry",
+                          title: 'somethingWentWrong',
+                          description: 'pleaseTryAgainLater',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getContactInfo(true,);
                           },
@@ -203,9 +204,9 @@ class _FAQPageState extends State<ContactUsPage>{
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/failure_lottie.json',
-                          title: 'Timeout',
-                          description: 'Please try again',
-                          buttonText: "Retry",
+                          title: 'timeout',
+                          description: 'pleaseTryAgain',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getContactInfo(true);
                           },
@@ -219,7 +220,7 @@ class _FAQPageState extends State<ContactUsPage>{
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(height: 26,),
-                            Text("Contact info",style: cartPageHeadingTextStyle,),
+                            Text("contactInfo",style: cartPageHeadingTextStyle,).tr(),
                             SizedBox(height: 10,),
                             Container(
                               padding: EdgeInsets.only(top: 14,bottom: 16,left: 12,right: 12),
@@ -241,7 +242,7 @@ class _FAQPageState extends State<ContactUsPage>{
                                   Row(
                                     children: [
                                       Expanded(child: Text("${controller.contactData.value.country!.name}",style: contactPageInfoStyle,)),
-                                      Expanded(child: Text("Follow Us",style: contactPageInfoStyle,))
+                                      Expanded(child: Text("followUs",style: contactPageInfoStyle,).tr())
                                     ],
                                   ),
                                   SizedBox(height: 9,),
@@ -322,7 +323,7 @@ class _FAQPageState extends State<ContactUsPage>{
                                       children: [
                                         SvgPicture.asset("assets/images/call.svg"),
                                         SizedBox(width: 5,),
-                                        Text("Whatsapp",style: introDescriptionTextStyle1,)
+                                        Text("whatsapp",style: introDescriptionTextStyle1,).tr()
                                       ],
                                     ),
                                   ),
@@ -336,7 +337,7 @@ class _FAQPageState extends State<ContactUsPage>{
                                       children: [
                                         SvgPicture.asset("assets/images/messenger.svg"),
                                         SizedBox(width: 5,),
-                                        Text("Messenger",style: introDescriptionTextStyle2,)
+                                        Text("messenger",style: introDescriptionTextStyle2,).tr()
                                       ],
                                     ),
                                   )
@@ -344,11 +345,11 @@ class _FAQPageState extends State<ContactUsPage>{
                               ),
                             ),
                             SizedBox(height: 16,),
-                            Text("Contact form",style: contactPageInfoStyle,),
+                            Text("contactForm",style: contactPageInfoStyle,).tr(),
                             SizedBox(height: 13,),
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 5),
-                              child: Text("Your name *",style: formFieldTitleStyle,),
+                              child: Text("yourName",style: formFieldTitleStyle,).tr(),
                             ),
                             SizedBox(height: 4,),
                             Container(
@@ -379,7 +380,7 @@ class _FAQPageState extends State<ContactUsPage>{
 
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 5),
-                              child: Text("Email address *",style: formFieldTitleStyle,),
+                              child: Text("emailAddress",style: formFieldTitleStyle,).tr(),
                             ),
                             SizedBox(height: 4,),
                             SizedBox(height: 40,child: TextFormField(
@@ -402,7 +403,7 @@ class _FAQPageState extends State<ContactUsPage>{
 
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 5),
-                              child: Text("Phone",style: formFieldTitleStyle,),
+                              child: Text("phone",style: formFieldTitleStyle,).tr(),
                             ),
                             SizedBox(height: 4,),
                             SizedBox(height: 40,child: TextFormField(
@@ -425,7 +426,7 @@ class _FAQPageState extends State<ContactUsPage>{
 
                             Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 5),
-                              child: Text("Message",style: formFieldTitleStyle,),
+                              child: Text("message",style: formFieldTitleStyle,).tr(),
                             ),
                             SizedBox(height: 4,),
                             TextFormField(
@@ -455,42 +456,42 @@ class _FAQPageState extends State<ContactUsPage>{
                                         borderRadius: BorderRadius.circular(10))),
                                 onPressed: () async{
                                   if(accountcontroller.token.isEmpty){
-                                    guestDialog(context, "You have to login first to send us a message");
+                                    guestDialog(context, "youHaveToLoginFirstToSendUsAMessage");
                                     return;
                                   }
 
                                   if(nameController.text.isEmpty){
-                                    showToast("Please enter name");
+                                    showToast("pleaseEnterName");
 
                                     return;
                                   }
                                   if(emailController.text.isEmpty){
-                                    showToast("Please enter email");
+                                    showToast("pleaseEnterEmail");
                                     return;
                                   }
                                   if(phoneController.text.isEmpty){
-                                    showToast("Please enter phone");
+                                    showToast("pleaseEnterPhone");
                                     return;
                                   }
                                   if(messageController.text.isEmpty){
-                                    showToast("Please enter message");
+                                    showToast("pleaseEnterMessage");
                                     return;
                                   }
                                   LoadingProgress.start(context);
                                   var response=await sendContactMessage(nameController.text, emailController.text, phoneController.text, messageController.text);
                                   LoadingProgress.stop(context);
                                   if(response.statusCode==201){
-                                    showToast("Message sent successfully");
+                                    showToast("messageSentSuccessfully");
                                     Navigator.of(context).pop();
                                   }else{
-                                    showToast("Message sent failed");
+                                    showToast("messageSentFailed");
                                   }
 
                                 },
                                 child: Text(
-                                  "Send",
+                                  "send",
                                   style: detailPageButtonTextStyle,
-                                ),
+                                ).tr(),
                               ),
                             ),
                           ],

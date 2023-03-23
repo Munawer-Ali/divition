@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:divisioniosfinal/page/forget_password/reset_password_page.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
@@ -84,11 +85,13 @@ class _VerificationPageState extends State<VerificationPage> {
                       ],
                     ),
                     SizedBox(height: 30,),
-                    Center(child: Text("Varification\nCode",style: confirmPageHeadingTextStyle,textAlign: TextAlign.center,)),
+                    Center(child: Text("varificationncode",style: confirmPageHeadingTextStyle,textAlign: TextAlign.center,).tr()),
                     SizedBox(height: 64,),
-                    Text("Enter your varification code",style: cartPageHeadingTextStyle1,),
+                    Text("enterYourVarificationCode",style: cartPageHeadingTextStyle1,).tr(),
                     SizedBox(height: 10,),
-                    Text("A 6 digit code has been sent\nto your email: ${widget.email}",style: introDescriptionTextStyle5,),
+                    Text("a6DigitCodeHasBeenSentntoYourEmailWidgetemail",style: introDescriptionTextStyle5,).tr( namedArgs: {
+                      "widget.email":widget.email
+                    }),
                     SizedBox(height: 39,),
                     Container(
                       padding: EdgeInsets.only(top: 50,bottom:50,left:  29,right: 29),
@@ -148,7 +151,7 @@ class _VerificationPageState extends State<VerificationPage> {
 
                     ),
                     SizedBox(height: 7,),
-                    Center(child: Text("Don’t receive an Code?",style: cartPageContactTextStyle1,)),
+                    Center(child: Text("dontReceiveAnCode",style: cartPageContactTextStyle1,).tr()),
                     SizedBox(height: 10,),
                     GestureDetector(
                       onTap: ()async{
@@ -165,7 +168,7 @@ class _VerificationPageState extends State<VerificationPage> {
                           showToast(message);
                         }
                       },
-                        child: Center(child: Text("Resend Code",style: cartPagePriceTextStyle1,))),
+                        child: Center(child: Text("resendCode",style: cartPagePriceTextStyle1,).tr())),
                     SizedBox(height: 38,),
                     SizedBox(
                       width: double.infinity,
@@ -176,7 +179,7 @@ class _VerificationPageState extends State<VerificationPage> {
                                 borderRadius: BorderRadius.circular(10))),
                         onPressed: () async{
                           if(controller.text.isEmpty){
-                            showToast("Please enter OTP code");
+                            showToast("pleaseEnterOtpCode").tr();
                             return;
                           }
                           LoadingProgress.start(context);
@@ -195,9 +198,9 @@ class _VerificationPageState extends State<VerificationPage> {
 
                         },
                         child: Text(
-                          "Submit",
+                          "submit",
                           style: detailPageButtonTextStyle,
-                        ),
+                        ).tr(),
                       ),
                     ),
 

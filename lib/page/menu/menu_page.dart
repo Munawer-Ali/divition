@@ -5,10 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:loading_progress/loading_progress.dart';
 import 'package:path_provider/path_provider.dart';
-
 import '../../api/api_call.dart';
 import '../../package/page_transition/enum.dart';
 import '../../package/page_transition/page_transition.dart';
@@ -77,7 +76,7 @@ class _MenuPageState extends State<MenuPage> {
                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                children: [
                  SizedBox(height: 20,width: 50,),
-                 Text("Menu",style: productPageTitleTextStyle,),
+                 Text("menu",style: productPageTitleTextStyle,).tr(),
                  SizedBox(height: 20,width: 50,)
                ],
              ),
@@ -92,7 +91,7 @@ class _MenuPageState extends State<MenuPage> {
                          setState(() {
                            index=1;
                            if(controller.token.value.isEmpty){
-                             guestDialog(context, "You must login first for account setting.");
+                             guestDialog(context, "youMustLoginFirstForAccountSetting");
                              return;
                            }
 
@@ -118,7 +117,7 @@ class _MenuPageState extends State<MenuPage> {
                            children: [
                              SvgPicture.asset("assets/images/profile.svg",color: index==1?Color(0xFF15375A):Color(0xFFD8A3DD),),
                              SizedBox(width: 14,),
-                             Text("Account Settings",style: index==1?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1),
+                             Text("accountSettings",style: index==1?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1).tr(),
 
                            ],
                          ),
@@ -131,7 +130,7 @@ class _MenuPageState extends State<MenuPage> {
                          setState(() {
                            index=2;
                            if(controller.token.value.isEmpty){
-                             guestDialog(context, "You must login first for seeing order history");
+                             guestDialog(context, "youMustLoginFirstForSeeingOrderHistory").tr();
                              return;
                            }
 
@@ -153,7 +152,7 @@ class _MenuPageState extends State<MenuPage> {
                            children: [
                              SvgPicture.asset("assets/images/order.svg",color: index==2?Color(0xFF15375A):Color(0xFFD8A3DD),),
                              SizedBox(width: 14,),
-                             Text("Orders",style: index==2?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1),
+                             Text("orders",style: index==2?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1).tr(),
 
                            ],
                          ),
@@ -167,7 +166,7 @@ class _MenuPageState extends State<MenuPage> {
                          setState(() {
                            index=4;
                            if(controller.token.value.isEmpty){
-                             guestDialog(context, "You must login first for wallet");
+                             guestDialog(context, "youMustLoginFirstForWallet").tr();
                              return;
                            }
                              Future.delayed(Duration(milliseconds: 50));
@@ -188,7 +187,7 @@ class _MenuPageState extends State<MenuPage> {
                            children: [
                              SvgPicture.asset("assets/images/wallet.svg",color: index==4?Color(0xFF15375A):Color(0xFFD8A3DD),),
                              SizedBox(width: 14,),
-                             Text("Wallet",style: index==4?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1),
+                             Text("wallet",style: index==4?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1).tr(),
 
                            ],
                          ),
@@ -222,7 +221,7 @@ class _MenuPageState extends State<MenuPage> {
                            children: [
                              Icon(Icons.question_mark,color: index==7?Color(0xFF15375A):Color(0xFFD8A3DD),),
                              SizedBox(width: 14,),
-                             Text("FAQ",style: index==7?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1),
+                             Text("faq",style: index==7?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1).tr(),
 
                            ],
                          ),
@@ -252,7 +251,7 @@ class _MenuPageState extends State<MenuPage> {
                            children: [
                              Icon(Icons.contact_page,color: index==8?Color(0xFF15375A):Color(0xFFD8A3DD),),
                              SizedBox(width: 14,),
-                             Text("Contact Us",style: index==8?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1),
+                             Text("contactUs",style: index==8?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1).tr(),
 
                            ],
                          ),
@@ -282,7 +281,7 @@ class _MenuPageState extends State<MenuPage> {
                            children: [
                              Icon(Icons.security,color: index==9?Color(0xFF15375A):Color(0xFFD8A3DD),),
                              SizedBox(width: 14,),
-                             Text("Terms and Conditions",style: index==9?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1),
+                             Text("termsAndConditions",style: index==9?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1).tr(),
 
                            ],
                          ),
@@ -304,9 +303,9 @@ class _MenuPageState extends State<MenuPage> {
                                  child: Column(
                                    mainAxisSize: MainAxisSize.min,
                                    children: [
-                                     Text("Alert!",),
+                                     Text("alert",).tr(),
                                      SizedBox(height: 30,),
-                                     Text("Your account will no longer available so you will not be able to login. Are you sure?"),
+                                     Text("yourAccountWillNoLongerAvailableSoYouWillNot").tr(),
                                      SizedBox(height: 20,),
                                      Row(
                                        children: [
@@ -315,7 +314,7 @@ class _MenuPageState extends State<MenuPage> {
                                            onPressed: (){
                                              Navigator.of(context).pop();
                                            },
-                                           child: Text("Cancel",style: TextStyle(color: Colors.white,fontSize: 14),),
+                                           child: Text("cancel",style: TextStyle(color: Colors.white,fontSize: 14),).tr(),
                                            style: ElevatedButton.styleFrom(
                                                primary: Color(0xFF262324)
                                            ),
@@ -330,16 +329,16 @@ class _MenuPageState extends State<MenuPage> {
                                              var response= await sendDelete();
                                              LoadingProgress.stop(context);
                                              if(response.statusCode==200){
-                                               showToast("Account deleted!");
+                                               showToast("accountDeleted").tr();
                                                await clearPrefsData();
                                                Navigator.of(context).pop();
                                                Navigator.of(context).pushAndRemoveUntil(PageTransition(child: SignInPage(), type: PageTransitionType.fade), (route) => false);
                                              }else{
-                                               showToast("Failed");
+                                               showToast("failed").tr();
                                              }
 
                                            },
-                                           child: Text("Yes",style: TextStyle(color: Colors.white,fontSize: 14),),
+                                           child: Text("yes",style: TextStyle(color: Colors.white,fontSize: 14),).tr(),
                                          )),
                                        ],
                                      )
@@ -363,7 +362,7 @@ class _MenuPageState extends State<MenuPage> {
                            children: [
                              Icon(Icons.delete,color: index==11?Color(0xFF15375A):Color(0xFFD8A3DD),),
                              SizedBox(width: 14,),
-                             Text("Delete Account",style: index==11?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1),
+                             Text("deleteAccount",style: index==11?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1).tr(),
 
                            ],
                          ),
@@ -389,7 +388,7 @@ class _MenuPageState extends State<MenuPage> {
                                  child: Column(
                                    mainAxisSize: MainAxisSize.min,
                                    children: [
-                                     Text("Are you sure you want to logout?",style: introDescriptionTextStyle,),
+                                     Text("areYouSureYouWantToLogout",style: introDescriptionTextStyle,).tr(),
                                      SizedBox(height: 30,),
                                      Row(
                                        children: [
@@ -398,7 +397,7 @@ class _MenuPageState extends State<MenuPage> {
                                            onPressed: (){
                                              Navigator.of(context,rootNavigator: true).pop();
                                            },
-                                           child: Text("Cancel",style: TextStyle(color: Colors.white,fontSize: 14),),
+                                           child: Text("cancel",style: TextStyle(color: Colors.white,fontSize: 14),).tr(),
                                            style: ElevatedButton.styleFrom(
                                                primary: Color(0xFF262324)
                                            ),
@@ -414,7 +413,7 @@ class _MenuPageState extends State<MenuPage> {
                                              Navigator.of(context,rootNavigator: true).pop();
                                              Navigator.of(context,rootNavigator: true).pushAndRemoveUntil(PageTransition(child: SignInPage(), type: PageTransitionType.fade), (route) => false);
                                            },
-                                           child: Text("Yes",style: TextStyle(color: Colors.white,fontSize: 14),),
+                                           child: Text("yes",style: TextStyle(color: Colors.white,fontSize: 14),).tr(),
                                          )),
                                        ],
                                      )
@@ -440,7 +439,7 @@ class _MenuPageState extends State<MenuPage> {
                              controller.token.value.isNotEmpty?SvgPicture.asset("assets/images/logout.svg",color: index==6?Color(0xFF15375A):Color(0xFFD8A3DD),):
                              Icon(Icons.login,color: index==6?Color(0xFF15375A):Color(0xFFD8A3DD),),
                              SizedBox(width: 14,),
-                             Text(controller.token.value.isNotEmpty?"Log out":"Login",style: index==6?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1),
+                             Text(controller.token.value.isNotEmpty?"logOut":"login",style: index==6?cartPageSpinnerTextStyle:detailPageHeadingTextStyle1).tr(),
 
                            ],
                          ),

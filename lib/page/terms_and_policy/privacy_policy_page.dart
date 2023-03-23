@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import '../../utils/constant.dart';
 
 class PrivacyPolicyPage extends StatefulWidget {
@@ -65,7 +65,7 @@ class _TermsAndConditionsState extends State<PrivacyPolicyPage> {
                       ],
                     ),
                     SizedBox(height: 60,),
-                    Center(child: Text("Privacy Policy",style: confirmPageHeadingTextStyle,)),
+                    Center(child: Text("privacyPolicy",style: confirmPageHeadingTextStyle,).tr()),
 
                   ],
                 ),

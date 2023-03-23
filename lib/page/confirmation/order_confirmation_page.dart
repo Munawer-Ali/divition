@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -123,9 +124,9 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                           },
                         ),
                         Text(
-                          "Order Confirmation",
+                          "orderConfirmation",
                           style: productPageTitleTextStyle,
-                        ),
+                        ).tr(),
                         SizedBox(
                           height: 20,
                           width: 50,
@@ -145,10 +146,10 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                         ),
                         Center(
                             child: Text(
-                          "THANK YOU FOR\nYOUR ORDER!",
+                          "thankYouFornyourOrder",
                           textAlign: TextAlign.center,
                           style: confirmPageHeadingTextStyle,
-                        )),
+                        ).tr()),
                         SizedBox(
                           height: 66,
                         ),
@@ -156,15 +157,15 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Store",
+                              "store",
                               style: detailPageHeadingTextStyle,
-                            ),
+                            ).tr(),
                             Text(
                               widget.placeData.user!.store == null
-                                  ? "Division Store"
+                                  ? "divisionStore"
                                   : widget.placeData.user!.store!,
                               style: cartPageContactTextStyle,
-                            )
+                            ).tr()
                           ],
                         ),
                         SizedBox(
@@ -175,9 +176,9 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Order Number:",
+                              "orderNumber",
                               style: detailPageHeadingTextStyle,
-                            ),
+                            ).tr(),
                             Text(
                               widget.placeData.no!,
                               style: cartPageContactTextStyle,
@@ -191,9 +192,9 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Order Date:",
+                              "orderDate",
                               style: detailPageHeadingTextStyle,
-                            ),
+                            ).tr(),
                             Text(
                               "${orderTime(widget.placeData.createdAt!)}",
                               style: cartPageContactTextStyle,
@@ -209,7 +210,7 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                             Text(
                               "Payment Type:",
                               style: detailPageHeadingTextStyle,
-                            ),
+                            ).tr(),
                             Text(
                               "${widget.placeData.paymentType}",
                               style: cartPageContactTextStyle,
@@ -223,9 +224,9 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Phone Number:",
+                              "phoneNumber",
                               style: detailPageHeadingTextStyle,
-                            ),
+                            ).tr(),
                             Text(
                               widget.placeData.phone == ""||widget.placeData.phone==null
                                   ? "Phone not available"
@@ -252,23 +253,23 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                               height: 21,
                             ),
                             Text(
-                              "Player Info",
+                              "playerInfo",
                               style: cartPageHeadingTextStyle,
-                            ),
+                            ).tr(),
                             SizedBox(
                               height: 11,
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Player ID:",style: detailPageHeadingTextStyle,),
+                                Text("playerId",style: detailPageHeadingTextStyle,).tr(),
                                 Text("${widget.playerId}",style: cartPageContactTextStyle,)
                               ],
                             ),
                             widget.playerName.isNotEmpty?Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Player Name:",style: detailPageHeadingTextStyle,),
+                                Text("playerName",style: detailPageHeadingTextStyle,).tr(),
                                 Text("${widget.playerName}",style: cartPageContactTextStyle,)
                               ],
                             ):SizedBox()
@@ -292,9 +293,9 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                               height: 21,
                             ),
                             Text(
-                              "Your Code",
+                              "yourCode",
                               style: detailPageHeadingTextStyle,
-                            ),
+                            ).tr(),
                             widget.placeData.codes==null?SizedBox():Column(
                                 children: widget.placeData.codes!
                                     .map((e) => ListTile(
@@ -323,9 +324,9 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                           height: 18,
                         ),
                         Text(
-                          "Order Summery",
+                          "orderSummery",
                           style: cartPageHeadingTextStyle,
-                        ),
+                        ).tr(),
                         SizedBox(
                           height: 11,
                         ),
@@ -333,9 +334,9 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Title:",
+                              "title",
                               style: detailPageHeadingTextStyle,
-                            ),
+                            ).tr(),
                             Text(
                               "${widget.placeData.product!.title}",
                               style: cartPageContactTextStyle,
@@ -349,9 +350,9 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Qty:",
+                              "qty",
                               style: detailPageHeadingTextStyle,
-                            ),
+                            ).tr(),
                             Text(
                               "${widget.placeData.qty}",
                               style: cartPageContactTextStyle,
@@ -365,9 +366,9 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Price:",
+                              "price",
                               style: detailPageHeadingTextStyle,
-                            ),
+                            ).tr(),
                             Text(
                               "${widget.placeData.product!.customerPrice!} $symbol",
                               style: cartPageContactTextStyle,
@@ -388,9 +389,9 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Subtotal",
+                              "subtotal",
                               style: detailPageHeadingTextStyle,
-                            ),
+                            ).tr(),
                             Text(
                               "${countJustTotal(widget.placeData)} $symbol",
                               style: cartPageContactTextStyle,
@@ -404,9 +405,9 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Discount",
+                              "discount",
                               style: detailPageHeadingTextStyle,
-                            ),
+                            ).tr(),
                             Text(
                               widget.placeData.coupon != null
                                   ? "${(countJustDiscount(widget.placeData))} $symbol"
@@ -422,9 +423,9 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Delivery Charge",
+                              "deliveryCharge",
                               style: detailPageHeadingTextStyle,
-                            ),
+                            ).tr(),
                             Text(
                               "${(widget.placeData.deliveryCharge!)}.0 $symbol",
                               style: cartPageContactTextStyle,
@@ -438,9 +439,9 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Total",
+                              "total",
                               style: cartPageHeadingTextStyle,
-                            ),
+                            ).tr(),
                             Text(
                               "${countJustFinalTotal(widget.placeData)} $symbol",
                               style: cartPageHeadingTextStyle,
@@ -496,9 +497,9 @@ class _CheekOutPageState extends State<ConfirmationPage> {
                               }
                             },
                             child: Text(
-                              "Print",
+                              "print",
                               style: detailPageButtonTextStyle,
-                            ),
+                            ).tr(),
                           ),
                         ),
                         const SizedBox(

@@ -11,7 +11,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:loading_progress/loading_progress.dart';
 import 'package:url_launcher/url_launcher.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import '../../api/api_call.dart';
 import '../../connectivity/connectivity_checker.dart';
 import '../../package/page_transition/enum.dart';
@@ -52,11 +52,11 @@ class _SignUpPageState extends State<SignUpPage> {
   bool errorEmail=false;
   bool errorPassword=false;
   bool errorConfirmPassword=false;
-  var fName="The fist name field is required";
-  var lName="The last name field is required";
-  var phoneNumber="The phone number field is required";
-  var email="The email field is required";
-  var password="The password field is required";
+  var fName="theFirstNameFieldIsRequired";
+  var lName="theLastNameFieldIsRequired";
+  var phoneNumber="thePhoneNumberFieldIsRequired";
+  var email="theEmailFieldIsRequired";
+  var password="thePasswordFieldIsRequired";
   var loading_msg="Preparing form data...";
   bool showconPassword=true;
   bool showPassword=true;
@@ -132,9 +132,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     return Center(
                       child: EmptyFailureNoInternetView(
                         image: 'assets/lottie/no_internet_lottie.json',
-                        title: 'Internet Error',
-                        description: 'Internet not found',
-                        buttonText: "Retry",
+                        title: 'internetError',
+                        description: 'internetNotFound',
+                        buttonText: "retry",
                         onPressed: () {
                           controller.getData(true);
                         },
@@ -145,9 +145,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     return Center(
                       child: EmptyFailureNoInternetView(
                         image: 'assets/lottie/no_internet_lottie.json',
-                        title: 'Internet Error',
-                        description: 'Internet not found',
-                        buttonText: "Retry",
+                        title: 'internetError',
+                        description: 'internetNotFound',
+                        buttonText: "retry",
                         onPressed: () {
                           controller.getData(true,);
                         },
@@ -158,9 +158,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     return Center(
                       child: EmptyFailureNoInternetView(
                         image: 'assets/lottie/failure_lottie.json',
-                        title: 'Server error',
-                        description: 'Please try again later',
-                        buttonText: "Retry",
+                        title: 'serverError',
+                        description: 'pleaseTryAgainLater',
+                        buttonText: "retry",
                         onPressed: () {
                           controller.getData(true);
                         },
@@ -171,9 +171,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     return Center(
                       child: EmptyFailureNoInternetView(
                         image: 'assets/lottie/failure_lottie.json',
-                        title: 'Something went wrong',
-                        description: 'Please try again later',
-                        buttonText: "Retry",
+                        title: 'somethingWentWrong',
+                        description: 'pleaseTryAgainLater',
+                        buttonText: "retry",
                         onPressed: () {
                           controller.getData(true,);
                         },
@@ -184,9 +184,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     return Center(
                       child: EmptyFailureNoInternetView(
                         image: 'assets/lottie/failure_lottie.json',
-                        title: 'Timeout',
-                        description: 'Please try again',
-                        buttonText: "Retry",
+                        title: 'timeout',
+                        description: 'pleaseTryAgain',
+                        buttonText: "retry",
                         onPressed: () {
                           controller.getData(true);
                         },
@@ -225,15 +225,15 @@ class _SignUpPageState extends State<SignUpPage> {
                                     ],
                                   ),
                                   SizedBox(height: 12,),
-                                  Center(child: Text("Sign Up",style: confirmPageHeadingTextStyle,)),
+                                  Center(child: Text("signUp",style: confirmPageHeadingTextStyle,).tr()),
                                   SizedBox(height: 32,),
-                                  Text("New Customer",style: cartPageHeadingTextStyle,),
+                                  Text("newCustomer",style: cartPageHeadingTextStyle,).tr(),
                                   SizedBox(height: 20,),
-                                  Text("Personal Informations",style: detailPageTitleTextStyle,),
+                                  Text("personalInformations",style: detailPageTitleTextStyle,).tr(),
                                   SizedBox(height: 23,),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    child: Text("User type",style: formFieldTitleStyle,),
+                                    child: Text("userType",style: formFieldTitleStyle,).tr(),
                                   ),
                                   SizedBox(height: 4,),
                                   SizedBox(height: 40,
@@ -247,13 +247,13 @@ class _SignUpPageState extends State<SignUpPage> {
                                               borderRadius: BorderRadius.circular(5)
                                           ),
                                           isDense: true,
-                                          hintText: "Select",
+                                          hintText: context.locale.toString().contains("en") ? "Select":"اختار",
                                           hintStyle: formFieldHintStyle,
                                           contentPadding: EdgeInsets.all(10)
                                       ),
                                       value: type,
                                       items: userType.map((e) => DropdownMenuItem(
-                                        child: Text(e),
+                                        child: Text(e,style: TextStyle(color: Colors.black),).tr(),
                                         value: e,
                                       )
                                       ).toList(),
@@ -272,11 +272,11 @@ class _SignUpPageState extends State<SignUpPage> {
 
                                     ),),
                                   SizedBox(height: 5,),
-                                  errorType?Text("The user type field is required.",style: TextStyle(color: Colors.red),):SizedBox(),
+                                  errorType?Text("theUserTypeFieldIsRequired",style: TextStyle(color: Colors.red),).tr():SizedBox(),
                                   SizedBox(height: 13,),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    child: Text("First name",style: formFieldTitleStyle,),
+                                    child: Text("firstName",style: formFieldTitleStyle,).tr(),
                                   ),
                                   SizedBox(height: 4,),
                                   Container(
@@ -328,11 +328,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                     ),
                                   ),
                                   SizedBox(height: 5,),
-                                  errorFirstName?Text(fName,style: TextStyle(color: Colors.red),):SizedBox(),
+                                  errorFirstName?Text(fName,style: TextStyle(color: Colors.red),).tr():SizedBox(),
                                   SizedBox(height: 13,),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    child: Text("Last name",style: formFieldTitleStyle,),
+                                    child: Text("lastName",style: formFieldTitleStyle,).tr(),
                                   ),
                                   SizedBox(height: 4,),
                                   SizedBox(height: 40,child: TextFormField(
@@ -359,14 +359,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                           .isEmpty) {
                                         setState(() {
                                           errorFirstName = true;
-                                          fName="The first name field is required";
+                                          fName="theLastNameFieldIsRequired";
                                         });
                                       }
                                       if (firstNameController.text.isNotEmpty&&!GetUtils.isUsername(
                                           firstNameController.text)) {
                                         setState(() {
                                           errorFirstName = true;
-                                          fName="First name is invalid";
+                                          fName="lastNameIsInvalid";
                                         });
                                       }
                                       if (firstNameController.text
@@ -400,12 +400,12 @@ class _SignUpPageState extends State<SignUpPage> {
                                     ),
                                   ),),
                                   SizedBox(height: 5,),
-                                  errorLastName?Text(lName,style: TextStyle(color: Colors.red),):SizedBox(),
+                                  errorLastName?Text(lName,style: TextStyle(color: Colors.red),).tr():SizedBox(),
                                   //drop down button
                                   SizedBox(height: 13,),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    child: Text("Country",style: formFieldTitleStyle,),
+                                    child: Text("country",style: formFieldTitleStyle,).tr(),
                                   ),
                                   SizedBox(height: 4,),
                                   SizedBox(height: 40,
@@ -419,13 +419,13 @@ class _SignUpPageState extends State<SignUpPage> {
                                               borderRadius: BorderRadius.circular(5)
                                           ),
                                           isDense: true,
-                                          hintText: "Select",
+                                          hintText: context.locale.toString().contains("en") ? "Select":"اختار",
                                           hintStyle: formFieldHintStyle,
                                           contentPadding: EdgeInsets.all(10)
                                       ),
                                       value: country,
                                       items: controller.formData.value.countries!.map((e) => DropdownMenuItem(
-                                        child: Text(e.name!),
+                                        child: Text(e.name!,style: TextStyle(color: Colors.black),),
                                         value: e.id,
                                       )
                                       ).toList(),
@@ -436,7 +436,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                           country=value as int;
                                           errorCountryName=false;
 
-                                          loading_msg="Please wait city data loading...";
+                                          loading_msg="pleaseWaitCityDataLoading";
 
                                         });
                                         controller.getCity(country.toString());
@@ -456,14 +456,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                             .isEmpty) {
                                           setState(() {
                                             errorFirstName = true;
-                                            fName="The first name field is required";
+                                            fName="theFirstNameFieldIsRequired";
                                           });
                                         }
                                         if (firstNameController.text.isNotEmpty&&!GetUtils.isUsername(
                                             firstNameController.text)) {
                                           setState(() {
                                             errorFirstName = true;
-                                            fName="First name is invalid";
+                                            fName="firstNameIsInvalid";
                                           });
                                         }
                                         if (firstNameController.text
@@ -482,14 +482,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                             .isEmpty) {
                                           setState(() {
                                             errorLastName = true;
-                                            lName="The last name field is required";
+                                            lName="theFirstNameFieldIsRequired";
                                           });
                                         }
                                         if (lastNameController.text.isNotEmpty&&!GetUtils.isUsername(
                                             lastNameController.text)) {
                                           setState(() {
                                             errorLastName = true;
-                                            lName="Last name is invalid";
+                                            lName="firstNameIsInvalid";
                                           });
                                         }
 
@@ -513,11 +513,11 @@ class _SignUpPageState extends State<SignUpPage> {
 
                                     ),),
                                   SizedBox(height: 5,),
-                                  errorCountryName?Text("The country field is required.",style: TextStyle(color: Colors.red),):SizedBox(),
+                                  errorCountryName?Text("theCountryFieldIsRequired",style: TextStyle(color: Colors.red),).tr():SizedBox(),
                                   SizedBox(height: 13,),
                                   controller.cityData.value.data!=null?Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    child: Text("City",style: formFieldTitleStyle,),
+                                    child: Text("city",style: formFieldTitleStyle,),
                                   ):SizedBox(),
                                   controller.cityData.value.data!=null?SizedBox(height: 4,):SizedBox(),
                                   controller.cityData.value.data!=null?SizedBox(height: 40,
@@ -531,13 +531,13 @@ class _SignUpPageState extends State<SignUpPage> {
                                               borderRadius: BorderRadius.circular(5)
                                           ),
                                           isDense: true,
-                                          hintText: "Select",
+                                          hintText: context.locale.toString().contains("en") ? "Select":"اختار",
                                           hintStyle: formFieldHintStyle,
                                           contentPadding: EdgeInsets.all(10)
                                       ),
                                       value: city,
                                       items: controller.cityData.value.data!.map((e) => DropdownMenuItem(
-                                        child: Text(e.name!),
+                                        child: Text(e.name!,style: TextStyle(color: Colors.black),),
                                         value: e.id,
                                       )
                                       ).toList(),
@@ -552,11 +552,11 @@ class _SignUpPageState extends State<SignUpPage> {
 
                                     ),):SizedBox(),
                                   errorCityName&&controller.cityData.value.data!=null?SizedBox(height: 5,):SizedBox(),
-                                  errorCityName&&controller.cityData.value.data!=null?Text("The city field is required.",style: TextStyle(color: Colors.red),):SizedBox(),
+                                  errorCityName&&controller.cityData.value.data!=null?Text("The city field is required.",style: TextStyle(color: Colors.red),).tr():SizedBox(),
                                   SizedBox(height: 13,),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    child: Text("Phone number",style: formFieldTitleStyle,),
+                                    child: Text("phoneNumber",style: formFieldTitleStyle,).tr(),
                                   ),
                                   SizedBox(height: 4,),
                                   SizedBox(height: 40,child: TextFormField(
@@ -581,14 +581,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                           .isEmpty) {
                                         setState(() {
                                           errorFirstName = true;
-                                          fName="The first name field is required";
+                                          fName="theFirstNameFieldIsRequired";
                                         });
                                       }
                                       if (firstNameController.text.isNotEmpty&&!GetUtils.isUsername(
                                           firstNameController.text)) {
                                         setState(() {
                                           errorFirstName = true;
-                                          fName="First name is invalid";
+                                          fName="firstNameIsInvalid";
                                         });
                                       }
                                       if (firstNameController.text
@@ -607,14 +607,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                           .isEmpty) {
                                         setState(() {
                                           errorLastName = true;
-                                          lName="The last name field is required";
+                                          lName="theFirstNameFieldIsRequired";
                                         });
                                       }
                                       if (lastNameController.text.isNotEmpty&&!GetUtils.isUsername(
                                           lastNameController.text)) {
                                         setState(() {
                                           errorLastName = true;
-                                          lName="Last name is invalid";
+                                          lName="firstNameIsInvalid";
                                         });
                                       }
 
@@ -670,11 +670,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                     ),
                                   ),),
                                   SizedBox(height: 5,),
-                                  errorPhone?Text(phoneNumber,style: TextStyle(color: Colors.red),):SizedBox(),
+                                  errorPhone?Text(phoneNumber,style: TextStyle(color: Colors.red),).tr():SizedBox(),
                                   SizedBox(height: 13,),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    child: Text("Email",style: formFieldTitleStyle,),
+                                    child: Text("email",style: formFieldTitleStyle,).tr(),
                                   ),
                                   SizedBox(height: 4,),
                                   SizedBox(height: 40,child: TextFormField(
@@ -699,14 +699,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                           .isEmpty) {
                                         setState(() {
                                           errorFirstName = true;
-                                          fName="The first name field is required";
+                                          fName="theFirstNameFieldIsRequired";
                                         });
                                       }
                                       if (firstNameController.text.isNotEmpty&&!GetUtils.isUsername(
                                           firstNameController.text)) {
                                         setState(() {
                                           errorFirstName = true;
-                                          fName="First name is invalid";
+                                          fName="firstNameIsInvalid";
                                         });
                                       }
                                       if (firstNameController.text
@@ -725,14 +725,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                           .isEmpty) {
                                         setState(() {
                                           errorLastName = true;
-                                          lName="The last name field is required";
+                                          lName="theFirstNameFieldIsRequired";
                                         });
                                       }
                                       if (lastNameController.text.isNotEmpty&&!GetUtils.isUsername(
                                           lastNameController.text)) {
                                         setState(() {
                                           errorLastName = true;
-                                          lName="Last name is invalid";
+                                          lName="firstNameIsInvalid";
                                         });
                                       }
 
@@ -762,7 +762,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       if(phoneNumberController.text.isEmpty){
                                         setState(() {
                                           errorPhone = true;
-                                          phoneNumber="The phone number field is required";
+                                          phoneNumber="thePhoneNumberFieldIsRequired";
                                         });
                                       }
                                       if(phoneNumberController.text.isNotEmpty){
@@ -774,7 +774,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       if(phoneNumberController.text.isNotEmpty&&!GetUtils.isPhoneNumber(phoneNumberController.text)){
                                         setState(() {
                                           errorPhone = true;
-                                          phoneNumber="Phone number is invalid";
+                                          phoneNumber="phoneNumberIsInvalid";
                                         });
                                       }
                                       if(GetUtils.isPhoneNumber(phoneNumberController.text)){
@@ -810,11 +810,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                     ),
                                   ),),
                                   SizedBox(height: 5,),
-                                  errorEmail?Text(email,style: TextStyle(color: Colors.red),):SizedBox(),
+                                  errorEmail?Text(email,style: TextStyle(color: Colors.red),).tr():SizedBox(),
                                   SizedBox(height: 13,),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    child: Text("Password",style: formFieldTitleStyle,),
+                                    child: Text("password",style: formFieldTitleStyle,).tr(),
                                   ),
                                   SizedBox(height: 4,),
                                   SizedBox(height: 40,child: TextFormField(
@@ -839,14 +839,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                           .isEmpty) {
                                         setState(() {
                                           errorFirstName = true;
-                                          fName="The first name field is required";
+                                          fName="theFirstNameFieldIsRequired";
                                         });
                                       }
                                       if (firstNameController.text.isNotEmpty&&!GetUtils.isUsername(
                                           firstNameController.text)) {
                                         setState(() {
                                           errorFirstName = true;
-                                          fName="First name is invalid";
+                                          fName="firstNameIsInvalid";
                                         });
                                       }
                                       if (firstNameController.text
@@ -865,14 +865,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                           .isEmpty) {
                                         setState(() {
                                           errorLastName = true;
-                                          lName="The last name field is required";
+                                          lName="theFirstNameFieldIsRequired";
                                         });
                                       }
                                       if (lastNameController.text.isNotEmpty&&!GetUtils.isUsername(
                                           lastNameController.text)) {
                                         setState(() {
                                           errorLastName = true;
-                                          lName="Last name is invalid";
+                                          lName="firstNameIsInvalid";
                                         });
                                       }
 
@@ -902,7 +902,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       if(phoneNumberController.text.isEmpty){
                                         setState(() {
                                           errorPhone = true;
-                                          phoneNumber="The phone number field is required";
+                                          phoneNumber="thePhoneNumberFieldIsRequired";
                                         });
                                       }
                                       if(phoneNumberController.text.isNotEmpty){
@@ -914,7 +914,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       if(phoneNumberController.text.isNotEmpty&&!GetUtils.isPhoneNumber(phoneNumberController.text)){
                                         setState(() {
                                           errorPhone = true;
-                                          phoneNumber="Phone number is invalid";
+                                          phoneNumber="phoneNumberIsInvalid";
                                         });
                                       }
                                       if(GetUtils.isPhoneNumber(phoneNumberController.text)){
@@ -925,7 +925,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       if(emailController.text.isEmpty){
                                         setState(() {
                                           errorEmail = true;
-                                          email="The email field is required";
+                                          email="theEmailFieldIsRequired";
                                         });
                                       }
                                       if(emailController.text.isNotEmpty){
@@ -937,7 +937,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       if(emailController.text.isNotEmpty&&!GetUtils.isEmail(emailController.text)){
                                         setState(() {
                                           errorEmail = true;
-                                          email="Email is invalid";
+                                          email="emailIsInvalid";
                                         });
                                       }
                                       if(GetUtils.isPhoneNumber(emailController.text)){
@@ -982,11 +982,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                     ),
                                   ),),
                                   SizedBox(height: 5,),
-                                  errorPassword?Text(password,style: TextStyle(color: Colors.red),):SizedBox(),
+                                  errorPassword?Text(password,style: TextStyle(color: Colors.red),).tr():SizedBox(),
                                   SizedBox(height: 13,),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    child: Text("Confirm Password",style: formFieldTitleStyle,),
+                                    child: Text("confirmPassword",style: formFieldTitleStyle,).tr(),
                                   ),
                                   SizedBox(height: 4,),
                                   SizedBox(height: 40,child: TextFormField(
@@ -1017,14 +1017,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                           .isEmpty) {
                                         setState(() {
                                           errorFirstName = true;
-                                          fName="The first name field is required";
+                                          fName="theFirstNameFieldIsRequired";
                                         });
                                       }
                                       if (firstNameController.text.isNotEmpty&&!GetUtils.isUsername(
                                           firstNameController.text)) {
                                         setState(() {
                                           errorFirstName = true;
-                                          fName="First name is invalid";
+                                          fName="firstNameIsInvalid";
                                         });
                                       }
                                       if (firstNameController.text
@@ -1043,14 +1043,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                           .isEmpty) {
                                         setState(() {
                                           errorLastName = true;
-                                          lName="The last name field is required";
+                                          lName="theFirstNameFieldIsRequired";
                                         });
                                       }
                                       if (lastNameController.text.isNotEmpty&&!GetUtils.isUsername(
                                           lastNameController.text)) {
                                         setState(() {
                                           errorLastName = true;
-                                          lName="Last name is invalid";
+                                          lName="firstNameIsInvalid";
                                         });
                                       }
 
@@ -1080,7 +1080,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       if(phoneNumberController.text.isEmpty){
                                         setState(() {
                                           errorPhone = true;
-                                          phoneNumber="The phone number field is required";
+                                          phoneNumber="thePhoneNumberFieldIsRequired";
                                         });
                                       }
                                       if(phoneNumberController.text.isNotEmpty){
@@ -1092,7 +1092,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       if(phoneNumberController.text.isNotEmpty&&!GetUtils.isPhoneNumber(phoneNumberController.text)){
                                         setState(() {
                                           errorPhone = true;
-                                          phoneNumber="Phone number is invalid";
+                                          phoneNumber="phoneNumberIsInvalid";
                                         });
                                       }
                                       if(GetUtils.isPhoneNumber(phoneNumberController.text)){
@@ -1103,7 +1103,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       if(emailController.text.isEmpty){
                                         setState(() {
                                           errorEmail = true;
-                                          email="The email field is required";
+                                          email="theEmailFieldIsRequired";
                                         });
                                       }
                                       if(emailController.text.isNotEmpty){
@@ -1115,7 +1115,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       if(emailController.text.isNotEmpty&&!GetUtils.isEmail(emailController.text)){
                                         setState(() {
                                           errorEmail = true;
-                                          email="Email is invalid";
+                                          email="emailIsInvalid";
                                         });
                                       }
                                       if(GetUtils.isPhoneNumber(emailController.text)){
@@ -1126,7 +1126,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       if(passwordController.text.isEmpty){
                                         setState(() {
                                           errorPassword = true;
-                                          password="The password field is required";
+                                          password="thePasswordFieldIsRequired";
                                         });
                                       }
                                       if(passwordController.text.isNotEmpty){
@@ -1137,7 +1137,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                       if(passwordController.text.isNotEmpty&&passwordController.text.length<6){
                                         setState(() {
                                           errorPassword = true;
-                                          password="Password cannot be smaller than 6 characters";
+                                          password="passwordCannotBeSmallerThan6Characters";
                                         });
                                       }
                                       if(passwordController.text.length>6){
@@ -1188,11 +1188,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                     ),
                                   ),),
                                   SizedBox(height: 5,),
-                                  errorConfirmPassword?Text("Confirm password not matched!",style: TextStyle(color: Colors.red),):SizedBox(),
+                                  errorConfirmPassword?Text("confirmPasswordNotMatched",style: TextStyle(color: Colors.red),).tr():SizedBox(),
                                   SizedBox(height: 13,),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(horizontal: 5),
-                                    child: Text("Store",style: formFieldTitleStyle,),
+                                    child: Text("store",style: formFieldTitleStyle,).tr(),
                                   ),
                                   SizedBox(height: 4,),
                                   SizedBox(height: 40,child: TextFormField(
@@ -1241,24 +1241,9 @@ class _SignUpPageState extends State<SignUpPage> {
                                       const SizedBox(
                                         width: 10,
                                       ),
-                                      const Expanded(
-                                        child: Text.rich(
-                                            TextSpan(text: "I accept terms and conditions", children: [
-                                            //   TextSpan(
-                                            //       text: "Terms and Conditions",
-                                            //       style: TextStyle(color: Colors.black,decoration: TextDecoration.underline),
-                                            //       recognizer: TapGestureRecognizer()
-                                            //         ..onTap = () => _launchInBrowser("https://divisionco.com/development/page/terms-and-conditions")),
-                                            //   TextSpan(text: " and ",),
-                                            //   TextSpan(
-                                            //       text: "Privacy Policy.",
-                                            //       style: TextStyle(color: Colors.black,decoration: TextDecoration.underline),
-                                            //       recognizer: TapGestureRecognizer()
-                                            //         ..onTap = () => _launchInBrowser("https://divisionco.com/development/page/privacy-policy"))
-                                            // ])),
-                                              ]
-                                      )
-                                        ))],
+                                       Expanded(
+                                child: Text("iAcceptTermsAndConditions",style: TextStyle(color: Colors.black),).tr(),
+                                      ),],
                                   ),
                                   SizedBox(height: 53,),
                                   SizedBox(
@@ -1272,14 +1257,14 @@ class _SignUpPageState extends State<SignUpPage> {
                                       onPressed: () async{
 
                                         setState((){
-                                          loading_msg="Signing up...";
+                                          loading_msg="signingUp";
                                         });
                                         if (type == null) {
 
                                           setState(() {
                                             errorType = true;
                                           });
-                                          showToast("Please select user type");
+                                          showToast("pleaseSelectUserType").tr();
                                           return;
 
                                         }
@@ -1288,9 +1273,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
                                           setState(() {
                                             errorFirstName = true;
-                                            fName="The first name field is required";
+                                            fName="theFirstNameFieldIsRequired";
                                           });
-                                          showToast("Please enter full name");
+                                          showToast("pleaseEnterFullName").tr();
                                           return;
                                         }
 
@@ -1299,9 +1284,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
                                           setState(() {
                                             errorLastName = true;
-                                            lName="The last name field is required";
+                                            lName="theFirstNameFieldIsRequired";
                                           });
-                                          showToast("Please enter the last name");
+                                          showToast("pleaseEnterTheLastName").tr();
                                           return;
                                         }
 
@@ -1310,7 +1295,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                           setState(() {
                                             errorCountryName = true;
                                           });
-                                          showToast("Please select country");
+                                          showToast("pleaseSelectCountry").tr();
                                           return;
                                         }
                                         if(city==null){
@@ -1318,7 +1303,7 @@ class _SignUpPageState extends State<SignUpPage> {
                                           setState(() {
                                             errorCityName = true;
                                           });
-                                          showToast("Please select city");
+                                          showToast("pleaseSelectCity").tr();
                                           return;
                                         }
 
@@ -1327,9 +1312,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
                                           setState(() {
                                             errorPhone = true;
-                                            phoneNumber="The phone number field is required";
+                                            phoneNumber="thePhoneNumberFieldIsRequired";
                                           });
-                                          showToast("Please enter phone number");
+                                          showToast("pleaseEnterPhoneNumber").tr();
                                           return;
                                         }
 
@@ -1337,9 +1322,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
                                           setState(() {
                                             errorPhone = true;
-                                            phoneNumber="Phone number is invalid";
+                                            phoneNumber="phoneNumberIsInvalid";
                                           });
-                                          showToast("Invalid phone number");
+                                          showToast("invalidPhoneNumber").tr();
                                           return;
                                         }
 
@@ -1347,9 +1332,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
                                           setState(() {
                                             errorEmail = true;
-                                            email="The email field is required";
+                                            email="theEmailFieldIsRequired";
                                           });
-                                          showToast("Please enter email");
+                                          showToast("pleaseEnterEmail").tr();
                                           return;
                                         }
 
@@ -1358,9 +1343,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
                                           setState(() {
                                             errorEmail = true;
-                                            email="Email is invalid";
+                                            email="emailIsInvalid";
                                           });
-                                          showToast("Please provide valid email");
+                                          showToast("pleaseProvideValidEmail").tr();
                                           return;
                                         }
 
@@ -1368,9 +1353,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
                                           setState(() {
                                             errorPassword = true;
-                                            password="The password field is required";
+                                            password="thePasswordFieldIsRequired";
                                           });
-                                          showToast("Please enter password");
+                                          showToast("pleaseEnterPassword").tr();
                                           return;
                                         }
 
@@ -1378,9 +1363,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
                                           setState(() {
                                             errorPassword = true;
-                                            password="Password cannot be smaller than 6 characters";
+                                            password="passwordCannotBeSmallerThan6Characters";
                                           });
-                                          showToast("Password not strong");
+                                          showToast("passwordNotStrong").tr();
                                           return;
                                         }
                                         if(passwordController.text!=confirmPasswordController.text){
@@ -1389,11 +1374,11 @@ class _SignUpPageState extends State<SignUpPage> {
                                             errorPassword = true;
                                             password="Confirm password not matched";
                                           });
-                                          showToast("Confirm password not matched");
+                                          showToast("confirmPasswordNotMatched").tr();
                                           return;
                                         }
                                         if(checkbox==false){
-                                          showToast("Please check Privacy Policy and Terms and Conditions");
+                                          showToast("pleaseCheckPrivacyPolicyAndTermsAndConditions").tr();
                                           return;
                                         }
                                         LoadingProgress.start(context);
@@ -1440,29 +1425,38 @@ class _SignUpPageState extends State<SignUpPage> {
                                         }
                                       },
                                       child: Text(
-                                        "Sign Up",
+                                        "signUp",
                                         style: detailPageButtonTextStyle,
-                                      ),
+                                      ).tr(),
                                     ),
                                   ),
                                   SizedBox(height: 5,),
-                                  Center(
-                                    child: Text.rich(
+                                  Center(child: Row(mainAxisAlignment: MainAxisAlignment.center,children: [
+                                    Text("ifYouAlreadyHaveAnAccountWithUsnpleaseLoginAt",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w500,color: Color(0xFF989898),height: 1.5)).tr(),
+                                    SizedBox(width: 5,),
+                                    InkWell(onTap: (){  Navigator.of(context).push(PageTransition(child: SignInPage(), type: PageTransitionType.fade));},
+                                      child: Text("login",
+                                        style:  TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: Color(0xFF15375A),height: 1.5),).tr(),
+                                    )
+                                  ],),),
 
-                                      TextSpan(
-                                        children: [
-                                          TextSpan(text: 'If you already have an account with us,\nplease login at the ',style: TextStyle(fontSize: 12,fontWeight: FontWeight.w500,color: Color(0xFF989898),height: 1.5)
-                                          ),
-                                          TextSpan(
-                                            text: 'Login',
-                                            recognizer: TapGestureRecognizer()..onTap=()=>Navigator.of(context).push(PageTransition(child: SignInPage(), type: PageTransitionType.fade)),
-                                            style:  TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: Color(0xFF15375A),height: 1.5),
-                                          ),
-                                        ],
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
+                                  // Center(
+                                  //   child: Text.rich(
+                                  //
+                                  //     TextSpan(
+                                  //       children: [
+                                  //         TextSpan(text: 'ifYouAlreadyHaveAnAccountWithUsnpleaseLoginAt',style: TextStyle(fontSize: 12,fontWeight: FontWeight.w500,color: Color(0xFF989898),height: 1.5)
+                                  //         ),
+                                  //         TextSpan(
+                                  //           text: 'login',
+                                  //           recognizer: TapGestureRecognizer()..onTap=()=>Navigator.of(context).push(PageTransition(child: SignInPage(), type: PageTransitionType.fade)),
+                                  //           style:  TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: Color(0xFF15375A),height: 1.5),
+                                  //         ),
+                                  //       ],
+                                  //     ),
+                                  //     textAlign: TextAlign.center,
+                                  //   ).tr(),
+                                  // ),
                                   SizedBox(height: 30,),
 
                                 ],
@@ -1500,21 +1494,23 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: 20,
                   ),
                   Text(
-                      "Message",
+                      "message",
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w500,
                           fontSize: 13)
-                  ),
+                  ).tr(),
                   SizedBox(
                     height: 20,
                   ),
                   Text(
-                      "An email sent to $email. Please verify your email address.",
+                      "anEmailSentToEmailPleaseVerifyYourEmailAddress",
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w500,
-                          fontSize: 13),textAlign: TextAlign.center,),
+                          fontSize: 13),textAlign: TextAlign.center,).tr( namedArgs: {
+                    "email": email
+                  }),
                   SizedBox(
                     height: 10,
                   ),
@@ -1533,11 +1529,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                          "OK",
+                          "ok",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
-                              fontWeight: FontWeight.w500)),
+                              fontWeight: FontWeight.w500)).tr(),
                     ),
                   ),
                   SizedBox(

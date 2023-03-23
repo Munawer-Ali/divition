@@ -20,6 +20,9 @@ class ProductListController extends GetxController{
    var list=<SearchL>[];
    try {
      getCategoryListData(slag).then((resp) {
+       for(var i = 0;i<resp.length;i++){
+         print(resp[i].customerPrice);
+       }
        list.addAll(resp);
        categoryList.value = list;
        loading(false);

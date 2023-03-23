@@ -130,15 +130,15 @@ Future<List<SearchL>> getCategoryListData(String slag) async {
   Map<String, String> headers = {'Authorization': 'Bearer $token','Accept':'application/json',};
   try {
     final response =
-        await http.get(Uri.parse("$urlCategoryList/$slag/product"),headers: headers);
+    await http.get(Uri.parse("$urlCategoryList/$slag/product?price=asc"),headers: headers);
     if (response.statusCode == 200) {
       var map = json.decode(response.body);
       SearchData modelObject = SearchData.fromJson(map);
       return modelObject.data!;
     }if(response.statusCode==401){
       await clearPrefsData();
-      Ta.Get.delete<AccountController>();
-      Ta.Get.offAll(() => SignInPage());
+      Ta.Get.delete();
+      Ta.Get.offAll(() => const SignInPage());
       throw Exception("server");
 
     }

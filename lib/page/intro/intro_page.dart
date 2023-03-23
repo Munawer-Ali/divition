@@ -1,4 +1,5 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -43,7 +44,7 @@ class _IntroPageState extends State<IntroPage> {
   ];
   AnimatedContainer _buildDots({int? index}) {
     return AnimatedContainer(
-      duration: const Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 200),
       decoration: BoxDecoration(
         borderRadius: const BorderRadius.all(
           Radius.circular(5),
@@ -127,7 +128,7 @@ class _IntroPageState extends State<IntroPage> {
                             }
                         ),
                       ),
-                      Expanded(flex: 2,child: Padding(
+                    context.locale.toString().contains("en") ? Expanded(flex: 2,child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 26),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -140,7 +141,7 @@ class _IntroPageState extends State<IntroPage> {
                               child: CircleAvatar(
                                 radius: 25.r,
                                 backgroundColor: Color(0xFF15375A),
-                                child: Text("SKIP",style: TextStyle(color: Colors.white),),
+                                child: Text("skip",style: TextStyle(color: Colors.white),).tr(),
 
                               ),
                             ),
@@ -171,7 +172,56 @@ class _IntroPageState extends State<IntroPage> {
                             )
                           ],
                         ),
-                      ),),
+                      ),):
+                    Expanded(flex: 2,child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 26),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          InkWell(
+                            onTap: ()async{
+                              if(currentPage==3){
+                                await saveBoolean(ISINTROVISITED, true);
+                                Navigator.of(context).push(PageTransition(child: SignInPage(), type: PageTransitionType.fade));
+                              }else{
+                                setState(() {
+                                  currentPage++;
+                                  controller.animateToPage(currentPage, duration: Duration(milliseconds: 200), curve: Curves.easeIn,);
+                                });
+                              }
+                            },
+                            child: CircleAvatar(
+                              radius: 25.r,
+                              backgroundColor: Color(0xFF15375A),
+                              child: SvgPicture.asset("assets/images/arrow_back.svg",color: Colors.white,),
+
+                            ),
+                          ),
+
+                          Row(
+                            children: List.generate(
+
+                              imageList.length,
+                                  (int index) => _buildDots(index: index),
+                            ),
+                          ),
+
+                          InkWell(
+                            onTap: (){
+                              Navigator.of(context).push(PageTransition(child: SignInPage(), type: PageTransitionType.fade));
+
+                            },
+                            child: CircleAvatar(
+                              radius: 25.r,
+                              backgroundColor: Color(0xFF15375A),
+                              child: Text("skip",style: TextStyle(color: Colors.white),).tr(),
+
+                            ),
+                          ),
+
+                        ],
+                      ),
+                    ),)
                     ],
                   ),
                 )

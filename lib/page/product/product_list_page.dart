@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:divisioniosfinal/model/search/search_data.dart';
 import 'package:divisioniosfinal/page/product/product_list_controller.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 
 
@@ -85,6 +86,7 @@ class _ProductListPageState extends State<ProductListPage>  {
   }
   @override
   Widget build(BuildContext context) {
+
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
@@ -126,7 +128,7 @@ class _ProductListPageState extends State<ProductListPage>  {
                         onPressed: (){
                           Navigator.of(context).pop();
                         },),
-                      Text("Product List",style: productPageTitleTextStyle,),
+                      Text("productList",style: productPageTitleTextStyle,).tr(),
                       SizedBox(height: 20,width: 50,)
                     ],
                   ),
@@ -150,9 +152,9 @@ class _ProductListPageState extends State<ProductListPage>  {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/no_internet_lottie.json',
-                          title: 'Internet Error',
-                          description: 'Internet not found',
-                          buttonText: "Retry",
+                          title: 'internetError',
+                          description: 'internetNotFound',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true,widget.slag);
                           },
@@ -163,9 +165,9 @@ class _ProductListPageState extends State<ProductListPage>  {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/no_internet_lottie.json',
-                          title: 'Internet Error',
-                          description: 'Internet not found',
-                          buttonText: "Retry",
+                          title: 'internetError',
+                          description: 'internetNotFound',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true,widget.slag);
                           },
@@ -176,9 +178,9 @@ class _ProductListPageState extends State<ProductListPage>  {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/failure_lottie.json',
-                          title: 'Server error',
-                          description: 'Please try again later',
-                          buttonText: "Retry",
+                          title: 'serverError',
+                          description: 'pleaseTryAgainLater',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true,widget.slag);
                           },
@@ -189,9 +191,9 @@ class _ProductListPageState extends State<ProductListPage>  {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/failure_lottie.json',
-                          title: 'Something went wrong',
-                          description: 'Please try again later',
-                          buttonText: "Retry",
+                          title: 'somethingWentWrong',
+                          description: 'pleaseTryAgainLater',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true,widget.slag);
                           },
@@ -202,9 +204,9 @@ class _ProductListPageState extends State<ProductListPage>  {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/failure_lottie.json',
-                          title: 'Timeout',
-                          description: 'Please try again',
-                          buttonText: "Retry",
+                          title: 'timeout',
+                          description: 'pleaseTryAgain',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true,widget.slag);
                           },
@@ -216,9 +218,9 @@ class _ProductListPageState extends State<ProductListPage>  {
                      return Center(
                        child: EmptyFailureNoInternetView(
                          image: 'assets/lottie/empty_lottie.json',
-                         title: 'No data',
-                         description: 'No data found',
-                         buttonText: "Retry",
+                         title: 'noData',
+                         description: 'noDataFound',
+                         buttonText: "retry",
                          onPressed: () {
                            controller.getData(true,widget.slag);
                          },
@@ -270,9 +272,6 @@ class _ProductListPageState extends State<ProductListPage>  {
                                       Row(
                                         children: [
                                           ClipRRect(
-
-
-
                                             child: CachedNetworkImage(
                                               imageUrl: "$imageBaseUrl/${controller.categoryList[index].image}",
                                               height: height,
@@ -308,16 +307,23 @@ class _ProductListPageState extends State<ProductListPage>  {
                                               Row(
                                                 children: [
                                                   Expanded(
-                                                    child: Text.rich(TextSpan(
-                                                      text: "Market Price ",
-                                                      style:productListPageTitleStyle,
-                                                      children: [
-                                                        TextSpan(
-                                                          text: "${controller.categoryList[index].customerPrice} $symbol",
-                                                          style: productListPriceStyle
-                                                        )
-                                                      ]
-                                                    )),
+                                                    child: Row(children: [
+                                                      Text("marketPrice",style:productListPageTitleStyle,).tr(),
+                                                      SizedBox(width: 5,),
+                                                      Text("${controller.categoryList[index].customerPrice} $symbol",style:productListPriceStyle,),
+                                                    ],),
+                                                    // child: Text.rich(TextSpan(
+                                                    //   locale: context.locale,
+                                                    //   text: "marketPrice",
+                                                    //   style:productListPageTitleStyle,
+                                                    //   children: [
+                                                    //     TextSpan(
+                                                    //       text: "${controller.categoryList[index].customerPrice} $symbol",
+                                                    //       style: productListPriceStyle,
+                                                    //       locale: context.locale
+                                                    //     )
+                                                    //   ]
+                                                    // )),
                                                   ),
                                                   role!='general'?GestureDetector(
                                                     onTap: (){
@@ -352,7 +358,7 @@ class _ProductListPageState extends State<ProductListPage>  {
                                                   keyboardType: TextInputType.number,
                                                   decoration: InputDecoration(
                                                       isDense: true,
-                                                      hintText: "Player ID",
+                                                      hintText: context.locale.toString().contains("en")?"Player ID":"رقم اللاعب",
                                                       hintStyle: productListPageHintStyle,
                                                       contentPadding: EdgeInsets.all(5),
                                                       border: OutlineInputBorder(
@@ -387,7 +393,7 @@ class _ProductListPageState extends State<ProductListPage>  {
                                                               loading=false;
                                                               enabled=true;
                                                             });
-                                                            showToast("Please enter player id");
+                                                            showToast("pleaseEnterPlayerId").tr();
                                                             return;
                                                           }
                                                           setState((){
@@ -432,7 +438,7 @@ class _ProductListPageState extends State<ProductListPage>  {
 
 
                                                           }else{
-                                                            showToast("Failed!");
+                                                            showToast("failed").tr();
                                                           }
 
 
@@ -458,11 +464,11 @@ class _ProductListPageState extends State<ProductListPage>  {
                                                           controller.categoryList[index].category!.type=='physical'||
                                                           controller.categoryList[index].category!.type=='top-up-no-api'?() async{
                                                         if(accountcontroller.token.isEmpty){
-                                                          guestDialog(context, "You must have to login first to buy");
+                                                          guestDialog(context, "youMustHaveToLoginFirstToBuy").tr();
                                                           return;
                                                         }
                                                         if(controller.categoryList[index].category!.type=='top-up-no-api'&&playerIdController.text.isEmpty){
-                                                          showToast("Please enter player id");
+                                                          showToast("pleaseEnterPlayerId").tr();
                                                           return;
                                                         }
                                                         setState((){
@@ -493,7 +499,7 @@ class _ProductListPageState extends State<ProductListPage>  {
                                                           showToast(message);
                                                         }
                                                       }:null,
-                                                      child: Text("Buy Now",style: productListButtonTextStyle,overflow: TextOverflow.ellipsis,maxLines: 1,),
+                                                      child: Text("buyNow",style: productListButtonTextStyle,overflow: TextOverflow.ellipsis,maxLines: 1,).tr(),
                                                     ),
                                                   ),),
                                                   SizedBox(width: 5,),
@@ -509,7 +515,7 @@ class _ProductListPageState extends State<ProductListPage>  {
                                                       onPressed: descriptionEnabled? (){
                                                         Navigator.of(context).push(PageTransition(child: DetailPage(categoryList: controller.categoryList[index],), type: PageTransitionType.fade));
                                                       }:null,
-                                                      child: Text("Description",style: productListButtonTextStyle,overflow: TextOverflow.ellipsis,maxLines: 1,),
+                                                      child: Text("description",style: productListButtonTextStyle,overflow: TextOverflow.ellipsis,maxLines: 1,).tr(),
                                                     ),
                                                   ),),
                                                 ],
@@ -518,9 +524,62 @@ class _ProductListPageState extends State<ProductListPage>  {
                                           ))
                                         ],
                                       ),
-                                      toolTip?Positioned(
+                                      toolTip? context.locale.toString().contains("en")?Positioned(
                                         top: 30,
                                         right: 0,
+                                          child: SizedBox(
+                                          child: Column(
+
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            crossAxisAlignment: CrossAxisAlignment.end,
+
+                                            children: [
+                                              Align(
+                                                alignment: Alignment.centerRight,
+                                                child: Padding(
+                                                  padding:EdgeInsets.only(right: 10),
+                                                  child: RotatedBox(
+                                                    quarterTurns: 0,
+                                                    child: ClipPath(
+                                                      clipper: ArrowClip(),
+                                                      child: Container(
+                                                        height: 10,
+                                                        width: 12,
+                                                        decoration: BoxDecoration(
+                                                          color: Color(0xFF262324),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  color: Color(0xFF262324),
+                                                  borderRadius: BorderRadius.circular(5),
+                                                ),
+                                                padding: const EdgeInsets.only(left: 10,right: 10,top: 3,bottom: 3),
+
+                                                child: Center(
+                                                  child: Text(
+                                                    "salesPriceGettooltippricecontrollercategorylistindexSymbol",
+                                                    style: productListToolTiptStyle,
+                                                  ).tr( namedArgs: {
+                                                    "price":getTooltipPrice(controller.categoryList[index]).toString(),
+                                                    "symbol":symbol,
+                                                  }
+                                                  ),
+                                                ),
+                                              ),
+
+
+                                            ],
+                                          ),
+                                        ),
+                                      ):
+                                      Positioned(
+                                        top: 30,
+                                        left: 10,
                                         child: SizedBox(
                                           child: Column(
 
@@ -556,8 +615,12 @@ class _ProductListPageState extends State<ProductListPage>  {
 
                                                 child: Center(
                                                   child: Text(
-                                                    "Sales Price: ${getTooltipPrice(controller.categoryList[index])} $symbol",
+                                                    "salesPriceGettooltippricecontrollercategorylistindexSymbol",
                                                     style: productListToolTiptStyle,
+                                                  ).tr( namedArgs: {
+                                                    "price":getTooltipPrice(controller.categoryList[index]).toString(),
+                                                    "symbol":symbol,
+                                                  }
                                                   ),
                                                 ),
                                               ),
@@ -633,7 +696,7 @@ class _ProductListPageState extends State<ProductListPage>  {
 
                                                     borderRadius: BorderRadius.circular(5)
                                                 ),
-                                                child: Text("Out of stock",style: productListOutTextStyle,),
+                                                child: Text("outOfStock",style: productListOutTextStyle,).tr(),
                                                 padding: EdgeInsets.all(5),
 
                                               ):SizedBox(),
@@ -664,9 +727,6 @@ class _ProductListPageState extends State<ProductListPage>  {
             loading?Center(
               child: widget.type=="top-up-jawaker"?Image.asset("assets/images/jawaker.gif"):Image.asset("assets/images/loader.gif"),
             ):SizedBox()
-
-
-
           ],
         )
       ),

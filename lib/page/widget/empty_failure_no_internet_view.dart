@@ -1,9 +1,10 @@
 
 
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:divisioniosfinal/page/widget/rounded_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
 class EmptyFailureNoInternetView extends StatelessWidget {
   EmptyFailureNoInternetView(
 
@@ -35,14 +36,14 @@ class EmptyFailureNoInternetView extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                title,
+                title.tr(),
                style: TextStyle(fontSize: 16),
               ),
               SizedBox(
                 height: 4,
               ),
               Text(
-                description,
+                description.tr(),
                 style: TextStyle(fontSize: 14),
               ),
               SizedBox(
@@ -51,7 +52,7 @@ class EmptyFailureNoInternetView extends StatelessWidget {
               status==1?RoundedElevatedButton(
                 width: 200,
                 onPressed: onPressed,
-                childText: buttonText,
+                childText: buttonText.tr(),
               ):Container()
             ],
           ),

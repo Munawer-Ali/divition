@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:divisioniosfinal/page/search/search_controller.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -12,7 +13,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:loading_progress/loading_progress.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import '../../api/api_call.dart';
 import '../../connectivity/connectivity_checker.dart';
 import '../../model/search/search_data.dart';
@@ -115,7 +116,7 @@ class _SearchPageState extends State<SearchPage> {
                           onPressed: (){
                             Navigator.of(context).pop();
                           },),
-                        Text("Search",style: productPageTitleTextStyle,),
+                        Text(context.locale.toString().contains("en") ? "Search" : "البحث",style: productPageTitleTextStyle,).tr(),
                         SizedBox(height: 20,width: 50,)
                       ],
                     ),
@@ -130,7 +131,7 @@ class _SearchPageState extends State<SearchPage> {
                         controller.getData(true, val);
                       },
                       decoration: InputDecoration(
-                        hintText: "Search",
+                        hintText: context.locale.toString().contains("en") ? "Search" : "البحث",
                         hintStyle: TextStyle(fontSize: 13),
                         isDense: true,
                         contentPadding: EdgeInsets.all(5),
@@ -167,9 +168,9 @@ class _SearchPageState extends State<SearchPage> {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/no_internet_lottie.json',
-                          title: 'Internet Error',
-                          description: 'Internet not found',
-                          buttonText: "Retry",
+                          title: 'internetError',
+                          description: 'internetNotFound',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true,searchController.text);
                           },
@@ -180,9 +181,9 @@ class _SearchPageState extends State<SearchPage> {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/no_internet_lottie.json',
-                          title: 'Internet Error',
-                          description: 'Internet not found',
-                          buttonText: "Retry",
+                          title: 'internetError',
+                          description: 'internetNotFound',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true,searchController.text);
                           },
@@ -193,9 +194,9 @@ class _SearchPageState extends State<SearchPage> {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/failure_lottie.json',
-                          title: 'Server error',
-                          description: 'Please try again later',
-                          buttonText: "Retry",
+                          title: 'serverError',
+                          description: 'pleaseTryAgainLater',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true,searchController.text);
                           },
@@ -206,9 +207,9 @@ class _SearchPageState extends State<SearchPage> {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/failure_lottie.json',
-                          title: 'Something went wrong',
-                          description: 'Please try again later',
-                          buttonText: "Retry",
+                          title: 'somethingWentWrong',
+                          description: 'pleaseTryAgainLater',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true,searchController.text);
                           },
@@ -219,9 +220,9 @@ class _SearchPageState extends State<SearchPage> {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/failure_lottie.json',
-                          title: 'Timeout',
-                          description: 'Please try again',
-                          buttonText: "Retry",
+                          title: 'timeout',
+                          description: 'pleaseTryAgain',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true,searchController.text);
                           },
@@ -233,9 +234,9 @@ class _SearchPageState extends State<SearchPage> {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/empty_lottie.json',
-                          title: 'No data',
-                          description: 'No data found',
-                          buttonText: "Retry",
+                          title: 'noData',
+                          description: 'noDataFound',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true,searchController.text);
                           },
@@ -245,7 +246,7 @@ class _SearchPageState extends State<SearchPage> {
                     }
                     else  if(searchController.text.isEmpty){
                       return Center(
-                        child: Text("Explore!",style: TextStyle(fontSize: 18),)
+                        child: Text("explore",style: TextStyle(fontSize: 18),).tr()
                       );
                     }
                     else{
@@ -330,17 +331,15 @@ class _SearchPageState extends State<SearchPage> {
                                               Row(
                                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                                 children: [
+
                                                   Expanded(
-                                                    child: Text.rich(TextSpan(
-                                                        text: "Market Price ",
-                                                        style:productListPageTitleStyle,
-                                                        children: [
-                                                          TextSpan(
-                                                              text: "${controller.order[index].customerPrice} $symbol",
-                                                              style: productListPriceStyle
-                                                          )
-                                                        ]
-                                                    )),
+                                                    child:Row(children: [
+                                                      Text("marketPrice",style:productListPageTitleStyle,).tr(),
+                                                      SizedBox(width: 5,),
+                                                      Text("${controller.order[index].customerPrice} $symbol",style:productListPriceStyle,).tr(),
+
+                                                    ],),
+
                                                   ),
                                                   role!='general'?GestureDetector(
                                                     onTap: (){
@@ -404,7 +403,7 @@ class _SearchPageState extends State<SearchPage> {
                                                               loading=false;
                                                               enabled=true;
                                                             });
-                                                            showToast("Please enter player id");
+                                                            showToast("pleaseEnterPlayerId").tr();
                                                             return;
                                                           }
                                                           setState((){
@@ -431,7 +430,7 @@ class _SearchPageState extends State<SearchPage> {
 
                                                             setState((){});
                                                           }else{
-                                                            showToast("Failed!");
+                                                            showToast("failed").tr();
                                                           }
 
 
@@ -479,7 +478,7 @@ class _SearchPageState extends State<SearchPage> {
                                                           showToast(message);
                                                         }
                                                       }:null,
-                                                      child: Text("Buy Now",style: productListButtonTextStyle,overflow: TextOverflow.ellipsis,maxLines: 1,),
+                                                      child: Text("buyNow",style: productListButtonTextStyle,overflow: TextOverflow.ellipsis,maxLines: 1,).tr(),
                                                     ),
                                                   ),),
                                                   SizedBox(width: 5,),
@@ -495,7 +494,7 @@ class _SearchPageState extends State<SearchPage> {
                                                       onPressed:descriptionEnabled? (){
                                                         Navigator.of(context).push(PageTransition(child: DetailPage(categoryList: controller.order[index],), type: PageTransitionType.fade));
                                                       }:null,
-                                                      child: Text("Description",style: productListButtonTextStyle,overflow: TextOverflow.ellipsis,maxLines: 1,),
+                                                      child: Text("description",style: productListButtonTextStyle,overflow: TextOverflow.ellipsis,maxLines: 1,).tr(),
                                                     ),
                                                   ),),
                                                 ],
@@ -504,7 +503,7 @@ class _SearchPageState extends State<SearchPage> {
                                           ))
                                         ],
                                       ),
-                                      toolTip?Positioned(
+                                      toolTip? context.locale.toString().contains("en")?Positioned(
                                         top: 30,
                                         right: 0,
                                         child: SizedBox(
@@ -542,8 +541,65 @@ class _SearchPageState extends State<SearchPage> {
 
                                                 child: Center(
                                                   child: Text(
-                                                    "Sales Price: ${getTooltipPrice(controller.order[index])} $symbol",
+                                                    "salesPriceGettooltippricecontrollercategorylistindexSymbol",
                                                     style: productListToolTiptStyle,
+                                                  ).tr( namedArgs: {
+                                                    "price":getTooltipPrice(controller.order[index]).toString(),
+                                                    "symbol":symbol,
+                                                  }
+                                                  ),
+                                                ),
+                                              ),
+
+
+                                            ],
+                                          ),
+                                        ),
+                                      ):
+                                      Positioned(
+                                        top: 30,
+                                        left: 10,
+                                        child: SizedBox(
+                                          child: Column(
+
+                                            mainAxisAlignment: MainAxisAlignment.end,
+                                            crossAxisAlignment: CrossAxisAlignment.end,
+
+                                            children: [
+                                              Align(
+                                                alignment: Alignment.centerRight,
+                                                child: Padding(
+                                                  padding:EdgeInsets.only(right: 10),
+                                                  child: RotatedBox(
+                                                    quarterTurns: 0,
+                                                    child: ClipPath(
+                                                      clipper: ArrowClip(),
+                                                      child: Container(
+                                                        height: 10,
+                                                        width: 12,
+                                                        decoration: BoxDecoration(
+                                                          color: Color(0xFF262324),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                  color: Color(0xFF262324),
+                                                  borderRadius: BorderRadius.circular(5),
+                                                ),
+                                                padding: const EdgeInsets.only(left: 10,right: 10,top: 3,bottom: 3),
+
+                                                child: Center(
+                                                  child: Text(
+                                                    "salesPriceGettooltippricecontrollercategorylistindexSymbol",
+                                                    style: productListToolTiptStyle,
+                                                  ).tr( namedArgs: {
+                                                    "price":getTooltipPrice(controller.order[index]).toString(),
+                                                    "symbol":symbol,
+                                                  }
                                                   ),
                                                 ),
                                               ),
@@ -621,7 +677,7 @@ class _SearchPageState extends State<SearchPage> {
 
                                                     borderRadius: BorderRadius.circular(5)
                                                 ),
-                                                child: Text("Out of stock",style: productListOutTextStyle,),
+                                                child: Text("outOfStock",style: productListOutTextStyle,).tr(),
                                                 padding: EdgeInsets.all(5),
 
                                               ):SizedBox(),

@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -102,7 +102,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                         onPressed: (){
                           Navigator.of(context).pop();
                         },),
-                      Text("Details",style: productPageTitleTextStyle,),
+                      Text("details",style: productPageTitleTextStyle,).tr(),
                       SizedBox(height: 20,width: 50,)
                     ],
                   ),
@@ -121,9 +121,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                         return Center(
                           child: EmptyFailureNoInternetView(
                             image: 'assets/lottie/no_internet_lottie.json',
-                            title: 'Internet Error',
-                            description: 'Internet not found',
-                            buttonText: "Retry",
+                            title: 'internetError',
+                            description: 'internetNotFound',
+                            buttonText: "retry",
                             onPressed: () {
                               controller.getOrderDetail(true,widget.id);
                             },
@@ -134,9 +134,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                         return Center(
                           child: EmptyFailureNoInternetView(
                             image: 'assets/lottie/no_internet_lottie.json',
-                            title: 'Internet Error',
-                            description: 'Internet not found',
-                            buttonText: "Retry",
+                            title: 'internetError',
+                            description: 'internetNotFound',
+                            buttonText: "retry",
                             onPressed: () {
                               controller.getOrderDetail(true,widget.id);
                             },
@@ -147,9 +147,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                         return Center(
                           child: EmptyFailureNoInternetView(
                             image: 'assets/lottie/failure_lottie.json',
-                            title: 'Server error',
-                            description: 'Please try again later',
-                            buttonText: "Retry",
+                            title: 'serverError',
+                            description: 'pleaseTryAgainLater',
+                            buttonText: "retry",
                             onPressed: () {
                               controller.getOrderDetail(true,widget.id);
                             },
@@ -160,9 +160,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                         return Center(
                           child: EmptyFailureNoInternetView(
                             image: 'assets/lottie/failure_lottie.json',
-                            title: 'Something went wrong',
-                            description: 'Please try again later',
-                            buttonText: "Retry",
+                            title: 'somethingWentWrong',
+                            description: 'pleaseTryAgainLater',
+                            buttonText: "retry",
                             onPressed: () {
                               controller.getOrderDetail(true,widget.id);
                             },
@@ -173,9 +173,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                         return Center(
                           child: EmptyFailureNoInternetView(
                             image: 'assets/lottie/failure_lottie.json',
-                            title: 'Timeout',
-                            description: 'Please try again',
-                            buttonText: "Retry",
+                            title: 'timeout',
+                            description: 'pleaseTryAgain',
+                            buttonText: "retry",
                             onPressed: () {
                               controller.getOrderDetail(true,widget.id);
                             },
@@ -189,7 +189,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                           children: [
                             Row(
                               children: [
-                                Text("Order number ",style: introDescriptionTextStyle8,),
+                                Text("orderNumber",style: introDescriptionTextStyle8,).tr(),
                                 Text("${controller.data.value.data!.no}",style: TextStyle(color: Color(0xFF15375A)),),
                               ],
                             ),
@@ -242,8 +242,8 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Store:",style: detailPageHeadingTextStyle,),
-                                Text(controller.data.value.data!.user!.store==null?"Division Store":controller.data.value.data!.user!.store!,style: cartPageContactTextStyle,)
+                                Text("store",style: detailPageHeadingTextStyle,).tr(),
+                                Text(controller.data.value.data!.user!.store==null?"divisionStore":controller.data.value.data!.user!.store!,style: cartPageContactTextStyle,).tr()
                               ],
                             ),
 
@@ -251,21 +251,21 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                             controller.data.value.data!.product!.category!.type=="physical"?SizedBox():controller.data.value.data!.playerId!=null?Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Player ID",style: detailPageHeadingTextStyle,),
+                                Text("playerId",style: detailPageHeadingTextStyle,).tr(),
                                 Text("${controller.data.value.data!.playerId}",style: cartPageContactTextStyle,)
                               ],
                             ):Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Player ID",style: detailPageHeadingTextStyle,),
-                                Text("No Player ID available",style: cartPageContactTextStyle,)
+                                Text("playerId",style: detailPageHeadingTextStyle,).tr(),
+                                Text("noPlayerIdAvailable",style: cartPageContactTextStyle,).tr()
                               ],
                             ),
                             controller.data.value.data!.playerName!=null?SizedBox(height: 7,):SizedBox(),
                             controller.data.value.data!.playerName!=null?Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Player Name",style: detailPageHeadingTextStyle,),
+                                Text("playerName",style: detailPageHeadingTextStyle,).tr(),
                                 Text("${controller.data.value.data!.playerName}",style: cartPageContactTextStyle,)
                               ],
                             ):SizedBox(),
@@ -273,7 +273,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Order Number:",style: detailPageHeadingTextStyle,),
+                                Text("orderNumber",style: detailPageHeadingTextStyle,).tr(),
                                 Text("${controller.data.value.data!.no}",style: cartPageContactTextStyle,)
                               ],
                             ),
@@ -281,7 +281,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Order Date:",style: detailPageHeadingTextStyle,),
+                                Text("orderDate",style: detailPageHeadingTextStyle,).tr(),
                                 Text("${orderTime(controller.data.value.data!.createdAt!)}",style: cartPageContactTextStyle,)
                               ],
                             ),
@@ -289,7 +289,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Payment Type:",style: detailPageHeadingTextStyle,),
+                                Text("Payment Type:",style: detailPageHeadingTextStyle,).tr(),
                                 Text("${controller.data.value.data!.paymentType}",style: cartPageContactTextStyle,)
                               ],
                             ),
@@ -297,8 +297,8 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Phone Number:",style: detailPageHeadingTextStyle,),
-                                Text(controller.data.value.data!.phone==null||controller.data.value.data!.phone==""?"Phone not available":"0${controller.data.value.data!.phone}",style: cartPageContactTextStyle,)
+                                Text("phoneNumber",style: detailPageHeadingTextStyle,).tr(),
+                                Text(controller.data.value.data!.phone==null||controller.data.value.data!.phone==""?"Phone not available":"0${controller.data.value.data!.phone}",style: cartPageContactTextStyle,).tr()
                               ],
                             ),
                             controller.data.value.data!.codes!=null&&controller.data.value.data!.codes!.isNotEmpty?SizedBox(height: 28,):SizedBox(),
@@ -326,12 +326,12 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                               color: Color(0xFFB2BAFF),
                             ),
                             SizedBox(height: 18,),
-                            Text("Order Summery",style: cartPageHeadingTextStyle,),
+                            Text("orderSummery",style: cartPageHeadingTextStyle,).tr(),
                             SizedBox(height: 11,),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Title:",style: detailPageHeadingTextStyle,),
+                                Text("title",style: detailPageHeadingTextStyle,).tr(),
                                 Text("${controller.data.value.data!.product!.title}",style: cartPageContactTextStyle,)
                               ],
                             ),
@@ -339,7 +339,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Qty:",style: detailPageHeadingTextStyle,),
+                                Text("qty",style: detailPageHeadingTextStyle,).tr(),
                                 Text("${controller.data.value.data!.qty}",style: cartPageContactTextStyle,)
                               ],
                             ),
@@ -347,7 +347,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Price:",style: detailPageHeadingTextStyle,),
+                                Text("price",style: detailPageHeadingTextStyle,).tr(),
                                 Text(role=="general"?"${controller.data.value.data!.product!.customerPrice} $symbol":"${controller.data.value.data!.product!.wholesalerPrice} $symbol",style: cartPageContactTextStyle,)
                               ],
                             ),
@@ -360,7 +360,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Subtotal",style: detailPageHeadingTextStyle,),
+                                Text("subtotal",style: detailPageHeadingTextStyle,).tr(),
                                 Text("${countJustTotal1(controller.data.value.data!,role)} $symbol",style: cartPageContactTextStyle,)
                               ],
                             ),
@@ -368,7 +368,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Discount",style: detailPageHeadingTextStyle,),
+                                Text("discount",style: detailPageHeadingTextStyle,).tr(),
                                 Text(controller.data.value.data!.coupon!=null?"${countJustDiscount1(controller.data.value.data!,role)} $symbol":"0.0 $symbol",style: cartPageContactTextStyle,)
                               ],
                             ),
@@ -382,7 +382,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text("Special Discount",style: detailPageHeadingTextStyle,),
+                                    Text("specialDiscount",style: detailPageHeadingTextStyle,).tr(),
                                     Text("${controller.data.value.data!.categorizedDiscountInAmount} $symbol",style: cartPageContactTextStyle,)
                                   ],
                                 ),
@@ -392,7 +392,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                             role=="general"?Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Delivery Charge",style: detailPageHeadingTextStyle,),
+                                Text("deliveryCharge",style: detailPageHeadingTextStyle,).tr(),
                                 Text("${controller.data.value.data!.deliveryCharge}.0 $symbol",style: cartPageContactTextStyle,)
                               ],
                             ):SizedBox(),
@@ -400,7 +400,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text("Total",style: cartPageHeadingTextStyle,),
+                                Text("total",style: cartPageHeadingTextStyle,).tr(),
                                 Text("${controller.data.value.data!.price} $symbol",style: cartPageHeadingTextStyle,)
                               ],
                             ),
@@ -424,7 +424,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                                }
                                
                               },
-                              child: Text("Resend",style: detailPageButtonTextStyle,),
+                              child: Text("resend",style: detailPageButtonTextStyle,).tr(),
                             ),):SizedBox(),
                             SizedBox(height:48 ,),
                             SizedBox(
@@ -486,9 +486,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                                   }
                                 },
                                 child: Text(
-                                  "Print",
+                                  "print",
                                   style: detailPageButtonTextStyle,
-                                ),
+                                ).tr(),
                               ),
                             ),
                             SizedBox(height: 40,)

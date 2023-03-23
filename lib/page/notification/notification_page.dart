@@ -36,6 +36,7 @@ class _NotificationPageState extends State<NotificationPage> {
     super.initState();
     getRole();
     internetController.startMonitoring();
+    controller.notificationData.clear();
     controller.getData(true);
   }
   getRole()async{
@@ -46,7 +47,7 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(
+      value: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.light,
           statusBarBrightness: Brightness.light
@@ -91,7 +92,7 @@ class _NotificationPageState extends State<NotificationPage> {
 
                   Obx((){
                     if(controller.loading.value==true){
-                      return Center(
+                      return const Center(
                         child: SpinKitCircle(
                           size: 140,
                           color: Color(0xFF8FC7FF),
@@ -177,7 +178,7 @@ class _NotificationPageState extends State<NotificationPage> {
                         ),
                       );
                     }
-                    else if(controller.loading.value==false&&controller.notificationData.value.data!.isEmpty){
+                    else if(controller.loading.value==false&&controller.notificationData.isEmpty){
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/empty_lottie.json',
@@ -209,16 +210,16 @@ class _NotificationPageState extends State<NotificationPage> {
                                       borderRadius: BorderRadius.circular(10),
                                       color: Color(0xFFE1ECEF)
                                   ),
-                                  child: Html(data: controller.notificationData.value.data![index].message),
+                                  child: Html(data: controller.notificationData[index].message),
                                 ),
                                 SizedBox(height: 4,),
-                                Text("${controller.notificationData.value.data![index].createdAt?.substring(0,10)}",style: formFieldHintStyle4,textAlign: TextAlign.end,),
-                                SizedBox(height: 4,),
+                                Text("${controller.notificationData[index].createdAt?.substring(0,10)}",style: formFieldHintStyle4,textAlign: TextAlign.end,),
+                                const SizedBox(height: 4,),
                               ],
                             );
                           },shrinkWrap: true,
                           primary: false,
-                          itemCount: controller.notificationData.value.data!.length,)
+                          itemCount: controller.notificationData.length,)
                       );
                     }
                   }),

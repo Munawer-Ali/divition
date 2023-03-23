@@ -8,7 +8,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import '../../connectivity/connectivity_checker.dart';
 import '../../utils/constant.dart';
 import '../widget/empty_failure_no_internet_view.dart';
@@ -75,9 +75,9 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                   return Center(
                     child: EmptyFailureNoInternetView(
                       image: 'assets/lottie/no_internet_lottie.json',
-                      title: 'Internet Error',
-                      description: 'Internet not found',
-                      buttonText: "Retry",
+                      title: 'internetError',
+                      description: 'internetNotFound',
+                      buttonText: "retry",
                       onPressed: () {
                         controller.getData(true);
                       },
@@ -88,9 +88,9 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                   return Center(
                     child: EmptyFailureNoInternetView(
                       image: 'assets/lottie/no_internet_lottie.json',
-                      title: 'Internet Error',
-                      description: 'Internet not found',
-                      buttonText: "Retry",
+                      title: 'internetError',
+                      description: 'internetNotFound',
+                      buttonText: "retry",
                       onPressed: () {
                         controller.getData(true,);
                       },
@@ -101,9 +101,9 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                   return Center(
                     child: EmptyFailureNoInternetView(
                       image: 'assets/lottie/failure_lottie.json',
-                      title: 'Server error',
-                      description: 'Please try again later',
-                      buttonText: "Retry",
+                      title: 'serverError',
+                      description: 'pleaseTryAgainLater',
+                      buttonText: "retry",
                       onPressed: () {
                         controller.getData(true);
                       },
@@ -114,9 +114,9 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                   return Center(
                     child: EmptyFailureNoInternetView(
                       image: 'assets/lottie/failure_lottie.json',
-                      title: 'Something went wrong',
-                      description: 'Please try again later',
-                      buttonText: "Retry",
+                      title: 'somethingWentWrong',
+                      description: 'pleaseTryAgainLater',
+                      buttonText: "retry",
                       onPressed: () {
                         controller.getData(true,);
                       },
@@ -127,9 +127,9 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                   return Center(
                     child: EmptyFailureNoInternetView(
                       image: 'assets/lottie/failure_lottie.json',
-                      title: 'Timeout',
-                      description: 'Please try again',
-                      buttonText: "Retry",
+                      title: 'timeout',
+                      description: 'pleaseTryAgain',
+                      buttonText: "retry",
                       onPressed: () {
                         controller.getData(true);
                       },
@@ -155,7 +155,7 @@ class _TermsAndConditionsState extends State<TermsAndConditions> {
                                 Navigator.of(context).pop();
 
                               },),
-                            Text("Terms and condition",style: productPageTitleTextStyle,),
+                              Text("termsAndCondition",style: productPageTitleTextStyle,).tr(),
                             SizedBox(height: 20,width: 50,)
                           ],
                         ),

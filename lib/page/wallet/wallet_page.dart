@@ -12,7 +12,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:loading_progress/loading_progress.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import '../../api/api_call.dart';
 import '../../connectivity/connectivity_checker.dart';
 import '../../utils/constant.dart';
@@ -55,7 +55,6 @@ class _WalletPageState extends State<WalletPage> {
     setState(() {});
   }
 
-
   @override
   Widget build(BuildContext context) {
     return AnnotatedRegion<SystemUiOverlayStyle>(
@@ -83,7 +82,7 @@ class _WalletPageState extends State<WalletPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding:  EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: [
                   SizedBox(
@@ -102,9 +101,9 @@ class _WalletPageState extends State<WalletPage> {
                         },
                       ),
                       Text(
-                        "Wallet",
+                        "wallet",
                         style: productPageTitleTextStyle,
-                      ),
+                      ).tr(),
                       SizedBox(
                         height: 20,
                         width: 50,
@@ -128,9 +127,9 @@ class _WalletPageState extends State<WalletPage> {
                         return Center(
                           child: EmptyFailureNoInternetView(
                             image: 'assets/lottie/no_internet_lottie.json',
-                            title: 'Internet Error',
-                            description: 'Internet not found',
-                            buttonText: "Retry",
+                            title: 'internetError',
+                            description: 'internetNotFound',
+                            buttonText: "retry",
                             onPressed: () {
                               controller.getData(true);
                             },
@@ -141,9 +140,9 @@ class _WalletPageState extends State<WalletPage> {
                         return Center(
                           child: EmptyFailureNoInternetView(
                             image: 'assets/lottie/no_internet_lottie.json',
-                            title: 'Internet Error',
-                            description: 'Internet not found',
-                            buttonText: "Retry",
+                            title: 'internetError',
+                            description: 'internetNotFound',
+                            buttonText: "retry",
                             onPressed: () {
                               controller.getData(
                                 true,
@@ -156,9 +155,9 @@ class _WalletPageState extends State<WalletPage> {
                         return Center(
                           child: EmptyFailureNoInternetView(
                             image: 'assets/lottie/failure_lottie.json',
-                            title: 'Server error',
-                            description: 'Please try again later',
-                            buttonText: "Retry",
+                            title: 'serverError',
+                            description: 'pleaseTryAgainLater',
+                            buttonText: "retry",
                             onPressed: () {
                               controller.getData(true);
                             },
@@ -169,9 +168,9 @@ class _WalletPageState extends State<WalletPage> {
                         return Center(
                           child: EmptyFailureNoInternetView(
                             image: 'assets/lottie/failure_lottie.json',
-                            title: 'Something went wrong',
-                            description: 'Please try again later',
-                            buttonText: "Retry",
+                            title: 'somethingWentWrong',
+                            description: 'pleaseTryAgainLater',
+                            buttonText: "retry",
                             onPressed: () {
                               controller.getData(
                                 true,
@@ -184,9 +183,9 @@ class _WalletPageState extends State<WalletPage> {
                         return Center(
                           child: EmptyFailureNoInternetView(
                             image: 'assets/lottie/failure_lottie.json',
-                            title: 'Timeout',
-                            description: 'Please try again',
-                            buttonText: "Retry",
+                            title: 'timeout',
+                            description: 'pleaseTryAgain',
+                            buttonText: "retry",
                             onPressed: () {
                               controller.getData(true);
                             },
@@ -201,7 +200,7 @@ class _WalletPageState extends State<WalletPage> {
                             SizedBox(
                               height: 25,
                             ),
-                            Text("Personal Balance",style: confirmPageHeadingTextStyle,),
+                            Text("personalBalance",style: confirmPageHeadingTextStyle,).tr(),
                             SizedBox(height: 8,),
                             Container(
                               padding: EdgeInsets.only(
@@ -260,7 +259,7 @@ class _WalletPageState extends State<WalletPage> {
                                                 mainAxisAlignment: MainAxisAlignment.start,
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
-                                                  Text("Total Balance",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 10)),
+                                                  Text("totalBalance",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 10)).tr(),
                                                   SizedBox(height: 5,),
                                                   Text("${accountcontroller.wallet.value} $symbol",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 16))
                                                 ],
@@ -277,9 +276,9 @@ class _WalletPageState extends State<WalletPage> {
                             Padding(
                               padding: const EdgeInsets.only(left: 5),
                               child: Text(
-                                "Upload Funds",
+                                "uploadFunds",
                                 style: confirmPageHeadingTextStyle,
-                              ),
+                              ).tr(),
                             ),
                             SizedBox(
                               height: 6,
@@ -293,7 +292,7 @@ class _WalletPageState extends State<WalletPage> {
                                 style: cartPageSpinnerTextStyle,
                                 decoration: InputDecoration(
                                     isDense: true,
-                                    hintText: "Enter Fund",
+                                    hintText: context.locale.toString().contains("en") ?"Enter Fund" :"أدخل قيمة الرصيد المطلوب",
                                     contentPadding: EdgeInsets.all(10),
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.circular(5),
@@ -314,7 +313,7 @@ class _WalletPageState extends State<WalletPage> {
                                         borderRadius: BorderRadius.circular(10))),
                                 onPressed: () async {
                                   if (amountController.text.isEmpty) {
-                                    showToast("Please enter your fund amount");
+                                    showToast("pleaseEnterYourFundAmount").tr();
                                     return;
                                   }
                                   LoadingProgress.start(context);
@@ -330,21 +329,21 @@ class _WalletPageState extends State<WalletPage> {
                                     controller.getData(true);
 
                                   } else {
-                                    showToast("Something wrong");
+                                    showToast("somethingWrong").tr();
                                   }
                                 },
                                 child: Text(
-                                  "Upload Fund",
+                                  "uploadFunds",
                                   style: detailPageButtonTextStyle,
-                                ),
+                                ).tr(),
                               ),
                             ),
                             Center(
                               child: EmptyFailureNoInternetView(
                                 image: 'assets/lottie/empty_lottie.json',
-                                title: 'Empty',
-                                description: 'Transaction history empty!',
-                                buttonText: "Retry",
+                                title: 'empty',
+                                description: 'transactionHistoryEmpty',
+                                buttonText: "retry",
                                 onPressed: () {
                                   controller.getData(true);
                                 },
@@ -356,7 +355,7 @@ class _WalletPageState extends State<WalletPage> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Text("No History Data!",style: TextStyle(fontSize: 16),)
+                            Text("noHistoryData",style: TextStyle(fontSize: 16),).tr()
                           ],
                         );
                       }
@@ -372,7 +371,7 @@ class _WalletPageState extends State<WalletPage> {
                                 SizedBox(
                                   height: 13,
                                 ),
-                                Text("Personal Balance",style: confirmPageHeadingTextStyle,),
+                                Text("personalBalance",style: confirmPageHeadingTextStyle,).tr(),
                                 SizedBox(height: 8,),
                                 Container(
                                   padding: EdgeInsets.only(
@@ -433,7 +432,7 @@ class _WalletPageState extends State<WalletPage> {
                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                     children: [
-                                                      Text("Total Balance",style:TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 10)),
+                                                      Text("totalBalance",style:TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 10)).tr(),
                                                       SizedBox(height: 5,),
                                                       Text("${accountcontroller.wallet.value} $symbol",style: TextStyle(color: Colors.white,fontWeight: FontWeight.w600,fontSize: 16))
                                                     ],
@@ -450,9 +449,9 @@ class _WalletPageState extends State<WalletPage> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 5),
                                   child: Text(
-                                    "Upload Funds",
+                                    "uploadFunds",
                                     style: productListTitleTextStyle,
-                                  ),
+                                  ).tr(),
                                 ),
                                 SizedBox(
                                   height: 6,
@@ -466,7 +465,7 @@ class _WalletPageState extends State<WalletPage> {
                                     style: cartPageSpinnerTextStyle,
                                     decoration: InputDecoration(
                                         isDense: true,
-                                        hintText: "Enter Fund",
+                                        hintText: context.locale.toString().contains("en") ? "Enter Fund":"أدخل قيمة الرصيد المطلوب",
                                         contentPadding: EdgeInsets.all(10),
                                         border: OutlineInputBorder(
                                             borderRadius: BorderRadius.circular(5),
@@ -487,7 +486,7 @@ class _WalletPageState extends State<WalletPage> {
                                             borderRadius: BorderRadius.circular(10))),
                                     onPressed: () async {
                                       if (amountController.text.isEmpty) {
-                                        showToast("Please enter your fund amount");
+                                        showToast("pleaseEnterYourFundAmount").tr();
                                         return;
                                       }
                                       LoadingProgress.start(context);
@@ -502,13 +501,13 @@ class _WalletPageState extends State<WalletPage> {
                                         accountcontroller.getData(false);
                                         controller.getData(true);
                                       } else {
-                                        showToast("Something wrong");
+                                        showToast("somethingWrong").tr();
                                       }
                                     },
                                     child: Text(
-                                      "Upload Fund",
+                                      "uploadFunds",
                                       style: detailPageButtonTextStyle,
-                                    ),
+                                    ).tr(),
                                   ),
                                 ),
                                 SizedBox(
@@ -519,9 +518,9 @@ class _WalletPageState extends State<WalletPage> {
                             Padding(
                               padding: const EdgeInsets.only(left: 5),
                               child: Text(
-                                "Transaction History",
+                                "transactionHistory",
                                 style: productListTitleTextStyle,
-                              ),
+                              ).tr(),
                             ),
                             SizedBox(
                               height: 7,
@@ -548,8 +547,8 @@ class _WalletPageState extends State<WalletPage> {
                                                   .wallet[index]
                                                   .transactionType ==
                                                   "Debit"
-                                                  ? Color(0xFF78DC94)
-                                                  : Color(0xFFDA0200),
+                                                  ? Color(0xFFDA0200)
+                                                  : Color(0xFF78DC94),
                                               child: controller.wallet[index]
                                                   .transactionType ==
                                                   "Debit"
@@ -570,10 +569,10 @@ class _WalletPageState extends State<WalletPage> {
                                               children: [
                                                 Text(
                                                   controller.wallet[index]
-                                                      .transactionTypeCase!,
+                                                      .transactionTypeCase!.toLowerCase(),
                                                   style:
                                                   detailPageHeadingTextStyle1,
-                                                ),
+                                                ).tr(),
                                                 Text(
                                                   controller
                                                       .wallet[index].createdAt!
@@ -590,10 +589,10 @@ class _WalletPageState extends State<WalletPage> {
                                             child: Text(
                                               controller.wallet[index].status == null
                                                   ? "${controller.wallet[index].orderNo}"
-                                                  : "${controller.wallet[index].status!.toUpperCase()}",
+                                                  : "${controller.wallet[index].status!.toLowerCase()}",
                                               style: detailPageHeadingTextStyle1,
                                               textAlign: TextAlign.center,
-                                            )),
+                                            ).tr()),
                                         Text(
                                           "${controller.wallet[index].amount!} $symbol",
                                           style: detailPageHeadingTextStyle1,

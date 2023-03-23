@@ -10,7 +10,7 @@ import '../../package/page_transition/enum.dart';
 import '../../package/page_transition/page_transition.dart';
 import '../../utils/constant.dart';
 import '../sign_in/sign_in_page.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 class ResetPasswordPage extends StatefulWidget {
   final String email;
   final String otp;
@@ -33,13 +33,13 @@ class _SignUpPageState extends State<ResetPasswordPage> {
   }
   String? validatePassword(String value) {
     if (value.length < 6) {
-      return "Password must be of 6 characters";
+      return "passwordMustBeOf6Characters".tr();
     }
     return null;
   }
   String? validateConfirmPassword(String newpassword,String confirmpassword) {
     if (newpassword!=confirmpassword) {
-      return "Confirm password not matched";
+      return "confirmPasswordNotMatched".tr();
     }
     return null;
   }
@@ -105,12 +105,12 @@ class _SignUpPageState extends State<ResetPasswordPage> {
                         ],
                       ),
                       SizedBox(height: 60,),
-                      Center(child: Text("Reset\nPassword",style: confirmPageHeadingTextStyle,textAlign: TextAlign.center,)),
+                      Center(child: Text("resetnpassword",style: confirmPageHeadingTextStyle,textAlign: TextAlign.center,).tr()),
                       SizedBox(height: 163,),
 
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: Text("New Password",style: formFieldTitleStyle,),
+                        child: Text("newPassword",style: formFieldTitleStyle,).tr(),
                       ),
                       SizedBox(height: 4,),
                       Container(
@@ -144,7 +144,7 @@ class _SignUpPageState extends State<ResetPasswordPage> {
                       SizedBox(height: 13,),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: Text("Confirm Password",style: formFieldTitleStyle,),
+                        child: Text("confirmPassword",style: formFieldTitleStyle,).tr(),
                       ),
                       SizedBox(height: 4,),
                       TextFormField(
@@ -198,9 +198,9 @@ class _SignUpPageState extends State<ResetPasswordPage> {
 
                           },
                           child: Text(
-                            "Reset Password",
+                            "resetPassword",
                             style: detailPageButtonTextStyle,
-                          ),
+                          ).tr(),
                         ),
                       ),
                       SizedBox(height: 5,),

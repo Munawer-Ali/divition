@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:divisioniosfinal/page/sign_in/two_factor_page.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
@@ -10,6 +10,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import 'package:loading_progress/loading_progress.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../api/api_call.dart';
 import '../../package/page_transition/enum.dart';
@@ -32,7 +33,8 @@ class _SignUpPageState extends State<SignInPage> {
   final passwordController=TextEditingController();
   bool showPassword=true;
   final controller =Get.put(AccountController());
-
+  String? LanguagedropDownValue;
+  List<String> Language = ["Arabic", "English"];
   @override
   Widget build(BuildContext context) {
 
@@ -69,7 +71,34 @@ class _SignUpPageState extends State<SignInPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(height: MediaQuery.of(context).padding.top,),
+                    SizedBox(height: 50,),
+                    InkWell(onTap: () async {
+                      SharedPreferences preferences = await SharedPreferences.getInstance();
+                      setState(() {
+                        if(context.locale.toString().contains("en")){
+                          preferences.setString("Language",'ar');
+                          context.setLocale(Locale('ar'));
+
+                        }else {
+                          preferences.setString("Language",'en');
+                          context.setLocale(Locale('en'));
+                        }
+                        Get.updateLocale(context.locale);
+
+                      });
+
+                    },child:  Container(decoration: BoxDecoration(
+                        border: Border.all(color: Colors.white,width: 3 ),
+                        shape: BoxShape.circle
+                    ),height: 50,width: 40,child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                   Text(context.locale.toString().contains('en') ? "ع" : "E",style: TextStyle(color: Colors.white,fontSize: 23,fontWeight: FontWeight.bold),),
+                        context.locale.toString().contains('en') ? SizedBox(height: 5,) :Center()   // LanguageSelect(),
+                 ],
+                    ),)),
+
+                    // SizedBox(height: MediaQuery.of(context).padding.top,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -78,14 +107,14 @@ class _SignUpPageState extends State<SignInPage> {
                         SizedBox(height: 20,width: 50,)
                       ],
                     ),
-                    SizedBox(height: 60,),
-                    Center(child: Text("Login",style: confirmPageHeadingTextStyle,)),
+                    SizedBox(height: 10,),
+                    Center(child: Text("login",style: confirmPageHeadingTextStyle,).tr()),
                     SizedBox(height: 50,),
                     Center(child: Image.asset("assets/images/logo.png")),
                     SizedBox(height: 80,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Text("Email",style: formFieldTitleStyle,),
+                      child: Text("email",style: formFieldTitleStyle,).tr(),
                     ),
                     SizedBox(height: 6,),
                     Container(
@@ -117,12 +146,11 @@ class _SignUpPageState extends State<SignInPage> {
 
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Text("Password",style: formFieldTitleStyle,),
+                      child: Text("password",style: formFieldTitleStyle,).tr(),
                     ),
                     SizedBox(height: 6,),
                     TextFormField(
                       obscureText: showPassword,
-
                       keyboardType: TextInputType.text,
                       controller: passwordController,
                       decoration: InputDecoration(
@@ -157,7 +185,7 @@ class _SignUpPageState extends State<SignInPage> {
                           onTap: (){
                             Navigator.of(context).push(PageTransition(child: ForgetPassword(), type: PageTransitionType.fade));
                           },
-                          child: Text("Forgot your password?",style: introDescriptionTextStyle,)),
+                          child: Text("forgotYourPassword",style: introDescriptionTextStyle,).tr()),
                     ),
                     SizedBox(height: 82,),
                     SizedBox(
@@ -171,12 +199,12 @@ class _SignUpPageState extends State<SignInPage> {
 
                           if(emailController.text.isEmpty){
 
-                            showToast("Please enter email");
+                            showToast("pleaseEnterEmail").tr();
                             return;
                           }
                           if(passwordController.text.isEmpty){
 
-                            showToast("Please enter password");
+                            showToast("pleaseEnterPassword").tr();
                             return;
                           }
                           LoadingProgress.start(context);
@@ -227,35 +255,44 @@ class _SignUpPageState extends State<SignInPage> {
 
                         },
                         child: Text(
-                          "Sign In",
+                          "signIn",
                           style: detailPageButtonTextStyle,
-                        ),
+                        ).tr(),
                       ),
                     ),
                     SizedBox(height: 5,),
-                    Center(
-                      child: Text.rich(
-
-                        TextSpan(
-                          children: [
-                            TextSpan(text: 'If you do not have an account please ',style: TextStyle(fontSize: 12,fontWeight: FontWeight.w500,color: Color(0xFF989898),height: 1.5)
-                            ),
-                            TextSpan(
-                              text: 'Sign Up',
-                              recognizer: TapGestureRecognizer()..onTap=()=>Navigator.of(context).push(PageTransition(child: SignUpPage(), type: PageTransitionType.fade)),
-                              style:  TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: Color(0xFF15375A),height: 1.5),
-                            ),
-                          ],
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    SizedBox(height: 50,),
+                    Center(child: Row(mainAxisAlignment: MainAxisAlignment.center,children: [
+                       Text("ifYouDoNotHaveAnAccountPlease",style: TextStyle(fontSize: 12,fontWeight: FontWeight.w500,color: Color(0xFF989898),height: 1.5)).tr(),
+                       SizedBox(width: 5,),
+                      InkWell(onTap: (){
+                        Navigator.of(context).push(PageTransition(child: SignUpPage(), type: PageTransitionType.fade));},
+                         child: Text("signUp",
+                           style:  TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: Color(0xFF15375A),height: 1.5),).tr(),
+                       )
+                    ],),),
+                    // Center(
+                    //   child: Text.rich(
+                    //
+                    //     TextSpan(
+                    //       children: [
+                    //         TextSpan(text: 'ifYouDoNotHaveAnAccountPlease',style: TextStyle(fontSize: 12,fontWeight: FontWeight.w500,color: Color(0xFF989898),height: 1.5)
+                    //         ),
+                    //         TextSpan(
+                    //           text: 'signUp',
+                    //           recognizer: TapGestureRecognizer()..onTap=()=>Navigator.of(context).push(PageTransition(child: SignUpPage(), type: PageTransitionType.fade)),
+                    //           style:  TextStyle(fontSize: 14,fontWeight: FontWeight.w500,color: Color(0xFF15375A),height: 1.5),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //     textAlign: TextAlign.center,
+                    //   ).tr(),
+                    // ),
+                    SizedBox(height: 30,),
 
                     Center(child: TextButton(onPressed: (){
                       Navigator.of(context).pushAndRemoveUntil(PageTransition(child: BottomContainerPage(index: 0, predefinePage: 'page1',), type: PageTransitionType.fade), (route) => false);
 
-                    }, child: Text("Skip for Now",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,decoration: TextDecoration.underline,color: Color(0xFF15375A)),)))
+                    }, child: Text("skipForNow",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w500,decoration: TextDecoration.underline,color: Color(0xFF15375A)),).tr()))
 
 
                   ],
@@ -285,21 +322,23 @@ class _SignUpPageState extends State<SignInPage> {
                     height: 20,
                   ),
                   Text(
-                    "Message",
+                    "message",
                       style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.w500,
                       fontSize: 13)
-                  ),
+                  ).tr(),
                   SizedBox(
                     height: 20,
                   ),
                   Text(
-                      "An email sent to $email. Please verify your email address.",
+                      "anEmailSentToEmailPleaseVerifyYourEmailAddress",
                       style: TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.w500,
-                          fontSize: 13),textAlign: TextAlign.center,),
+                          fontSize: 13),textAlign: TextAlign.center,).tr( namedArgs: {
+                    "email": email
+                  }),
                   SizedBox(
                     height: 10,
                   ),
@@ -317,11 +356,11 @@ class _SignUpPageState extends State<SignInPage> {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                          "OK",
+                          "ok",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
-                              fontWeight: FontWeight.w500)),
+                              fontWeight: FontWeight.w500)).tr(),
                     ),
                   ),
                   SizedBox(
@@ -333,4 +372,30 @@ class _SignUpPageState extends State<SignInPage> {
           );
         });
   }
+  DropdownButton<String> LanguageSelect() {
+    return DropdownButton<String>(
+      icon: SizedBox(),
+      underline: SizedBox(),
+      items: Language.map((String items) {
+        return DropdownMenuItem(value: items, child: Text(items,style: TextStyle(color: Colors.black,fontSize: 12),));
+      }).toList(),
+      onChanged: (String? newValue) async {
+        SharedPreferences preferences = await SharedPreferences.getInstance();
+        setState(() {
+          LanguagedropDownValue = newValue!;
+          if(newValue == "English"){
+            preferences.setString("Language",'en');
+            context.setLocale(Locale('en'));
+     
+          }else if(newValue == "Arabic"){
+            preferences.setString("Language",'ar');
+            context.setLocale(Locale('ar'));
+          }
+          Get.updateLocale(context.locale);
+
+        });
+      },
+    );
+  }
+
 }

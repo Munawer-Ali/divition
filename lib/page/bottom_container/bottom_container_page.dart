@@ -2,6 +2,8 @@
 
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
+
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -246,7 +248,7 @@ class _BottomContainerPageState extends State<BottomContainerPage> {
                 Navigator.of(context, rootNavigator: true).pop();
                 
               },
-              child: const Text('Ok'),
+              child: const Text('ok').tr(),
             )
           ],
         ),
@@ -327,7 +329,7 @@ class _BottomContainerPageState extends State<BottomContainerPage> {
             return false;
           } else {
             if (cantExit) {
-              showToast("Press Back button again to Exit");
+              showToast("pressBackButtonAgainToExit").tr();
               return false;
             } else {
               return true;

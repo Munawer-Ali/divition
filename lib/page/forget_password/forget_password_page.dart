@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_utils/src/get_utils/get_utils.dart';
 import 'package:loading_progress/loading_progress.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../api/api_call.dart';
 import '../../package/page_transition/enum.dart';
@@ -30,7 +31,7 @@ class _SignUpPageState extends State<ForgetPassword> {
   }
   String? validateEmail(String value) {
     if (!GetUtils.isEmail(value)) {
-      return "Provide valid Email";
+      return "provideValidEmail".tr();
     }
     return null;
   }
@@ -97,13 +98,13 @@ class _SignUpPageState extends State<ForgetPassword> {
                         ],
                       ),
                       SizedBox(height: 60,),
-                      Center(child: Text("Forgot\nPassword",style: confirmPageHeadingTextStyle,textAlign: TextAlign.center,)),
+                      Center(child: Text("forgotnpassword",style: confirmPageHeadingTextStyle,textAlign: TextAlign.center,).tr()),
                       SizedBox(height: 43,),
                       Center(child: Image.asset("assets/images/forget_logo.png")),
                       SizedBox(height: 51,),
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5),
-                        child: Text("Email",style: formFieldTitleStyle,),
+                        child: Text("email",style: formFieldTitleStyle,).tr(),
                       ),
                       SizedBox(height: 4,),
                       Container(
@@ -164,9 +165,9 @@ class _SignUpPageState extends State<ForgetPassword> {
 
                           },
                           child: Text(
-                            "Submit",
+                            "submit",
                             style: detailPageButtonTextStyle,
-                          ),
+                          ).tr(),
                         ),
                       ),
                       SizedBox(height: 30,)

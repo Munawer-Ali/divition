@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 
+import 'package:easy_localization/easy_localization.dart';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -65,6 +67,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
     getCurrency();
     internetController.startMonitoring();
     controller.getData(true);
+
   }
   @override
   void dispose() {
@@ -121,7 +124,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                         onPressed: (){
                           Navigator.of(context).pop();
                         },),
-                      Text("Check Out",style: productPageTitleTextStyle,),
+                      Text("checkOut",style: productPageTitleTextStyle,).tr(),
                       SizedBox(height: 20,width: 50,)
                     ],
                   ),
@@ -139,9 +142,9 @@ class _CheekOutPageState extends State<CheekOutPage> {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/no_internet_lottie.json',
-                          title: 'Internet Error',
-                          description: 'Internet not found',
-                          buttonText: "Retry",
+                          title: 'internetError',
+                          description: 'internetNotFound',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true);
                           },
@@ -152,9 +155,9 @@ class _CheekOutPageState extends State<CheekOutPage> {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/no_internet_lottie.json',
-                          title: 'Internet Error',
-                          description: 'Internet not found',
-                          buttonText: "Retry",
+                          title: 'internetError',
+                          description: 'internetNotFound',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true,);
                           },
@@ -165,9 +168,9 @@ class _CheekOutPageState extends State<CheekOutPage> {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/failure_lottie.json',
-                          title: 'Server error'.tr,
-                          description: 'Please try again later',
-                          buttonText: "Retry",
+                          title: 'serverError',
+                          description: 'pleaseTryAgainLater',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true);
                           },
@@ -178,9 +181,9 @@ class _CheekOutPageState extends State<CheekOutPage> {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/failure_lottie.json',
-                          title: 'Something went wrong',
-                          description: 'Please try again later',
-                          buttonText: "Retry",
+                          title: 'somethingWentWrong',
+                          description: 'pleaseTryAgainLater',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true,);
                           },
@@ -191,9 +194,9 @@ class _CheekOutPageState extends State<CheekOutPage> {
                       return Center(
                         child: EmptyFailureNoInternetView(
                           image: 'assets/lottie/failure_lottie.json',
-                          title: 'Timeout',
-                          description: 'Please try again',
-                          buttonText: "Retry",
+                          title: 'timeout',
+                          description: 'pleaseTryAgain',
+                          buttonText: "retry",
                           onPressed: () {
                             controller.getData(true);
                           },
@@ -208,7 +211,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                           SizedBox(height: 13,),
                           Padding(
                             padding: const EdgeInsets.only(left: 30),
-                            child: Text("Order Summery",style: cartPageHeadingTextStyle,),
+                            child: Text("orderSummery",style: cartPageHeadingTextStyle,).tr(),
                           ),
                           SizedBox(height: 37,),
                           ListView.builder(
@@ -276,7 +279,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                                                               controller.discount.value=data['data']['discount'].toString();
                                                               controller.deliveryCharge.value=data['data']['cod_delivery_charge'].toString();
                                                             }else{
-                                                              showToast("Something wrong");
+                                                              showToast("somethingWrong").tr();
                                                             }
                                                             // controller.cart[index].quantity--;
                                                             // controller.cart[index].subtotal=controller.cart[index].quantity*controller.cart[index].price;
@@ -314,7 +317,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                                                             controller.discount.value=data['data']['discount'].toString();
                                                             controller.deliveryCharge.value=data['data']['cod_delivery_charge'].toString();
                                                           }else{
-                                                            showToast("Something wrong");
+                                                            showToast("somethingWrong").tr();
                                                           }
                                                         },
                                                         icon: Icon(Icons.add),
@@ -350,7 +353,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
 
                               children: [
-                                Text("Customer number",style: cartPageContactTextStyle,),
+                                Text("customerNumber",style: cartPageContactTextStyle,).tr(),
                                 SizedBox(height: 7,),
                                 Row(
                                   children: [
@@ -361,12 +364,12 @@ class _CheekOutPageState extends State<CheekOutPage> {
                                         color: Color(0xFFFAFAFF)
                                        ),
                                       child: Padding(
-                                        padding: const EdgeInsets.only(left: 10,right: 10),
+                                        padding:  EdgeInsets.only(left: 10,right: 10),
                                         child: DropdownButtonFormField(
-                                          decoration: const InputDecoration(
+                                          decoration: InputDecoration(
                                             border: InputBorder.none,
                                             contentPadding: EdgeInsets.all(10),
-                                            hintText: "Select"
+                                            hintText: context.locale.toString().contains("en") ? "Select":  "اختار",
                                           ),
                                           value: countryId,
                                           isExpanded: true,
@@ -436,7 +439,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
 
                               children: [
-                                Text("Payment Type",style: cartPageContactTextStyle,),
+                                Text("paymentType",style: cartPageContactTextStyle,).tr(),
                                 SizedBox(height: 7,),
                                 Row(
                                   children: [
@@ -449,10 +452,10 @@ class _CheekOutPageState extends State<CheekOutPage> {
                                       child: Padding(
                                         padding: const EdgeInsets.only(left: 10,right: 10),
                                         child: DropdownButtonFormField(
-                                          decoration: const InputDecoration(
+                                          decoration:  InputDecoration(
                                               border: InputBorder.none,
                                               contentPadding: EdgeInsets.all(10),
-                                              hintText: "Select"
+                                              hintText: context.locale.toString().contains("en") ? "Select":  "اختار",
                                           ),
                                           value: paymentType,
                                           isExpanded: true,
@@ -463,7 +466,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                                           items: list.map((String items) {
                                             return DropdownMenuItem(
                                               value: items,
-                                              child: Text(items,style: cartPageSpinnerTextStyle,),
+                                              child: Text(items,style: cartPageSpinnerTextStyle,).tr(),
                                             );
                                           }).toList(),
                                           // After selecting the desired option,it will
@@ -486,7 +489,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                                               controller.discount.value=data['data']['discount'].toString();
                                               controller.deliveryCharge.value=data['data']['cod_delivery_charge'].toString();
                                             }else{
-                                              showToast("Something went wrong");
+                                              showToast("somethingWentWrong").tr();
                                             }
 
                                           },
@@ -537,7 +540,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                                           ),
                                           fillColor: Color(0xFFE1ECEF),
                                           filled: true,
-                                          hintText: "Gift card/Discount code",
+                                          hintText: context.locale.toString().contains("en") ? "Gift card/Discount code":"كود خصم",
                                           hintStyle: cartPageContactTextStyle,
                                           isDense: true,
                                           contentPadding: EdgeInsets.all(10)
@@ -553,7 +556,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                                         
                                         onPressed: ()async{
                                           if(couponController.text.isEmpty){
-                                            showToast("Please enter Gift card/Discount code");
+                                            showToast("pleaseEnterGiftCarddiscountCode").tr();
                                             return;
                                           }
                                           print(couponController.text.toString());
@@ -579,7 +582,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                                           )
                                         ),
 
-                                        child: Text("Use",style: detailPageDescTextStyle,),
+                                        child: Text("use",style: detailPageDescTextStyle,).tr(),
                                       ),
                                     )
 
@@ -591,7 +594,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                                   children: [
-                                    Text("Subtotal",style: cartPageContactTextStyle,),
+                                    Text("subtotal",style: cartPageContactTextStyle,).tr(),
                                     Obx(() => Text("${controller.subtotal.value} $symbol",style: cartPageContactTextStyle,))
                                   ],
                                 ),
@@ -601,7 +604,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                                   children: [
-                                    Text("Discount",style: cartPageContactTextStyle,),
+                                    Text("discount",style: cartPageContactTextStyle,).tr(),
                                     Obx(() => Text("${controller.discount.value} $symbol",style: cartPageContactTextStyle,))
                                   ],
                                 ),
@@ -611,7 +614,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                                   children: [
-                                    Text("Delivery Charge",style: cartPageContactTextStyle,),
+                                    Text("deliveryCharge",style: cartPageContactTextStyle,).tr(),
                                     Obx(() => Text("${controller.deliveryCharge.value} $symbol",style: cartPageContactTextStyle,))
                                   ],
                                 ):SizedBox(),
@@ -620,22 +623,22 @@ class _CheekOutPageState extends State<CheekOutPage> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                                   children: [
-                                    Text("Not Satisfied?",style: cartPageContactTextStyle,),
+                                    Text("notSatisfied",style: cartPageContactTextStyle,).tr(),
                                     TextButton(onPressed: ()async{
                                       LoadingProgress.start(context);
                                       var response=await deleteCoupons();
                                       LoadingProgress.stop(context);
                                       if(response.statusCode==200){
-                                        showToast("Applied coupon removed!");
+                                        showToast("appliedCouponRemoved").tr();
                                         couponController.text="";
                                         controller.discount.value="";
                                         controller.getData(false);
                                         setState((){});
 
                                       }else{
-                                        showToast("Something wrong");
+                                        showToast("somethingWrong").tr();
                                       }
-                                    },child: Text("Remove"),)
+                                      },child: Text("remove").tr(),)
                                   ],
                                 ):SizedBox(),
                                 SizedBox(height: 23,),
@@ -644,7 +647,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
 
                                   children: [
-                                    Text("Total",style: cartPagePriceTextStyle,),
+                                    Text("total",style: cartPagePriceTextStyle,).tr(),
                                     Obx(() => Text("${controller.total.value} $symbol",style: cartPagePriceTextStyle,))
                                   ],
                                 )
@@ -663,7 +666,7 @@ class _CheekOutPageState extends State<CheekOutPage> {
                               onPressed: () async{
                                 var typedata="";
                                 if(paymentType==null&&role=="general"){
-                                  showToast("Please select payment type");
+                                  showToast("pleaseSelectPaymentType").tr();
                                   return ;
                                 }
                                 if(paymentType!=null){
@@ -711,9 +714,9 @@ class _CheekOutPageState extends State<CheekOutPage> {
 
                               },
                               child: Text(
-                                "Complete",
+                                "complete",
                                 style: detailPageButtonTextStyle,
-                              ),
+                              ).tr(),
                             ),
                           ),
                           SizedBox(height: 40,)

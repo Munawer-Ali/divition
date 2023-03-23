@@ -1,6 +1,7 @@
 import 'dart:collection';
 import 'dart:convert';
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -86,7 +87,7 @@ class _WebPageState extends State<WebPage> {
               ),
               centerTitle: true,
               backgroundColor: Colors.white,
-              title: Text("Payment",style: TextStyle(color: Colors.black),)
+              title: Text("payment",style: TextStyle(color: Colors.black),).tr()
 
           ),
           body: Builder(builder: (BuildContext context) {
@@ -136,7 +137,7 @@ class _WebPageState extends State<WebPage> {
                         PlaceOrderData placeData=PlaceOrderData.fromJson(map);
                         Navigator.of(context).push(PageTransition(child: ConfirmationPage(placeData: placeData.data!, playerName: widget.playerName, playerId: widget.playerId, from: 'web',), type: PageTransitionType.fade));
                       }else{
-                        showToast("Failed!");
+                        showToast("failed").tr();
                         Navigator.of(context).pop();
                       }
                     }
@@ -182,8 +183,8 @@ class _WebPageState extends State<WebPage> {
       context: context,
       builder: (cont) {
         return AlertDialog(
-          title:  const Text("Alert!"),
-          content:  const Text('Are you sure want to exit?'),
+          title:   Text("alert").tr(),
+          content:   Text('areYouSureWantToExit').tr(),
           actions: <Widget>[
             TextButton(
               onPressed: () {
@@ -192,11 +193,11 @@ class _WebPageState extends State<WebPage> {
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
               } ,
-              child: Text('Yes',style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w600,color: Colors.black),),
+              child: Text('yes',style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w600,color: Colors.black),).tr(),
             ),
             TextButton(
               onPressed: () => Navigator.of(cont).pop(),
-              child: Text('No',style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w600,color: Colors.green),),
+              child: Text('no',style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w600,color: Colors.green),).tr(),
             ),
           ],
         );

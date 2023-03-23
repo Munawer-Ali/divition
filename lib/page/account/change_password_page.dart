@@ -8,6 +8,7 @@ import 'package:loading_progress/loading_progress.dart';
 
 import '../../api/api_call.dart';
 import '../../utils/constant.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({Key? key}) : super(key: key);
@@ -61,28 +62,23 @@ class _SignUpPageState extends State<ChangePasswordPage> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(height: MediaQuery.of(context).padding.top,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-
-                          icon: SvgPicture.asset("assets/images/arrow_back.svg"),
-                          splashRadius: 20,
-                          iconSize: 30,
-                          onPressed: (){
-                            Navigator.of(context).pop();
-                          },),
-                        Text("",style: productPageTitleTextStyle,),
-                        SizedBox(height: 20,width: 50,)
-                      ],
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: IconButton(
+                        icon: SvgPicture.asset("assets/images/arrow_back.svg"),
+                        splashRadius: 20,
+                        iconSize: 30,
+                        onPressed: (){
+                          Navigator.of(context).pop();
+                        },),
                     ),
                     SizedBox(height: 60,),
-                    Center(child: Text("Change\nPassword",style: confirmPageHeadingTextStyle,textAlign: TextAlign.center,)),
+                    Center(child: Text("changenpassword",style: confirmPageHeadingTextStyle,textAlign: TextAlign.center,).tr()),
                     SizedBox(height: 163,),
 
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Text("Password",style: formFieldTitleStyle,),
+                      child: Text("password",style: formFieldTitleStyle,).tr(),
                     ),
                     SizedBox(height: 4,),
                     Container(
@@ -124,7 +120,7 @@ class _SignUpPageState extends State<ChangePasswordPage> {
 
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Text("New Password",style: formFieldTitleStyle,),
+                      child: Text("newPassword",style: formFieldTitleStyle,).tr(),
                     ),
                     SizedBox(height: 4,),
                     SizedBox(height: 40,child: TextFormField(
@@ -155,7 +151,7 @@ class _SignUpPageState extends State<ChangePasswordPage> {
                     SizedBox(height: 13,),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Text("Confirm Password",style: formFieldTitleStyle,),
+                      child: Text("confirmPassword",style: formFieldTitleStyle,).tr(),
                     ),
                     SizedBox(height: 4,),
                     SizedBox(height: 40,child: TextFormField(
@@ -194,19 +190,19 @@ class _SignUpPageState extends State<ChangePasswordPage> {
                                 borderRadius: BorderRadius.circular(10))),
                         onPressed: () async{
                            if(passwordController.text.isEmpty){
-                             showToast("Please enter password.");
+                             showToast("pleaseEnterPassword").tr();
                              return;
                            }
                            if(newPasswordController.text.isEmpty){
-                             showToast("Please enter new password.");
+                             showToast("pleaseEnterNewPassword").tr();
                              return;
                            }
                            if(confirmPasswordController.text.isEmpty){
-                             showToast("Please enter confirm password.");
+                             showToast("pleaseEnterConfirmPassword").tr();
                              return;
                            }
                            if(newPasswordController.text!=confirmPasswordController.text){
-                             showToast("Confirm password not matched.");
+                             showToast("confirmPasswordNotMatched").tr();
                              return;
                            }
                            LoadingProgress.start(context);
@@ -227,9 +223,9 @@ class _SignUpPageState extends State<ChangePasswordPage> {
 
                         },
                         child: Text(
-                          "Update Password",
+                          "updatePassword",
                           style: detailPageButtonTextStyle,
-                        ),
+                        ).tr(),
                       ),
                     ),
                     SizedBox(height: 5,),

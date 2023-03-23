@@ -17,6 +17,7 @@ import '../../package/page_transition/enum.dart';
 import '../../package/page_transition/page_transition.dart';
 import '../../utils/constant.dart';
 import '../../utils/pdf_helper.dart';
+import 'package:easy_localization/easy_localization.dart';
 import '../../utils/pdf_helper1.dart';
 import '../account/account_controller.dart';
 import '../order_detail/order_details_page.dart';
@@ -34,8 +35,8 @@ class OrderPage extends StatefulWidget {
 }
 
 class _OrderPageState extends State<OrderPage> {
-  var list = ["All Order", "Completed", "Canceled","Pending"];
-  var dropDownValue = "All Order";
+  var list = ["allOrder", "Completed", "Canceled","Pending"];
+  var dropDownValue = "allOrder";
   int toggle = 0;
   var tap;
   bool isTap = false;
@@ -146,9 +147,9 @@ class _OrderPageState extends State<OrderPage> {
                             },
                           ),
                           Text(
-                            "Orders",
+                            "orders",
                             style: productPageTitleTextStyle,
-                          ),
+                          ).tr(),
                           PopupMenuButton(
                               icon: Image.asset("assets/images/upload.png"),
                               itemBuilder: (context){
@@ -173,7 +174,7 @@ class _OrderPageState extends State<OrderPage> {
                                           // sized box with width 10
                                           width: 10,
                                         ),
-                                        Text("Export PDF")
+                                        Text("exportPdf").tr()
                                       ],
                                     ),
                                   ),
@@ -199,7 +200,7 @@ class _OrderPageState extends State<OrderPage> {
                                           // sized box with width 10
                                           width: 10,
                                         ),
-                                        Text("Export Excel")
+                                        Text("exportExcel").tr()
                                       ],
                                     ),
                                   ),
@@ -217,7 +218,7 @@ class _OrderPageState extends State<OrderPage> {
                           GestureDetector(
                             onTap: (){
                               _selectDate(context).then((value) {
-                                dropDownValue = "All Order";
+                                dropDownValue = "allOrder";
                                 setState((){});
                                 date="from=$formattedDate&to=$formattedDate1";
                                 controller.getData(true, "", date);
@@ -248,7 +249,7 @@ class _OrderPageState extends State<OrderPage> {
                             ),
                           ),
                           Text(
-                            "To",
+                            "to",
                             style: cartPageContactTextStyle,
                           ),
                           GestureDetector(
@@ -258,7 +259,7 @@ class _OrderPageState extends State<OrderPage> {
                                 //   showToast("Please select from date");
                                 //   return;
                                 // }
-                                dropDownValue = "All Order";
+                                dropDownValue = "allOrder";
                                 setState((){});
                                 date="from=$formattedDate&to=$formattedDate1";
                                 controller.getData(true, "", date);
@@ -297,7 +298,7 @@ class _OrderPageState extends State<OrderPage> {
                               value: dropDownValue,
                               items: list
                                   .map((e) => DropdownMenuItem(
-                                child: Text(e),
+                                child: Text(e,style: TextStyle(color: Colors.black),).tr(),
                                 value: e,
                               ))
                                   .toList(),
@@ -305,7 +306,7 @@ class _OrderPageState extends State<OrderPage> {
                                 setState(() {
 
                                   dropDownValue = value as String;
-                                  if(dropDownValue=="All Order"){
+                                  if(dropDownValue=="allOrder"){
                                     date="";
                                     
                                     controller.getData(true, "", "");
@@ -326,20 +327,19 @@ class _OrderPageState extends State<OrderPage> {
                       ),
                       Obx(() {
                         if (controller.loading.value == true) {
-                          return const Center(
+                          return Center(
                             child: SpinKitCircle(
                               size: 140,
                               color: Color(0xFF8FC7FF),
                             ),
                           );
-                        }
-                        else if(accountcontroller.token.value.isEmpty){
+                        }else if(accountcontroller.token.value.isEmpty){
                           return Center(
                             child: EmptyFailureNoInternetView(
                               image: 'assets/lottie/login.json',
-                              title: 'Alert',
-                              description: 'Please login first',
-                              buttonText: "Login",
+                              title: 'alert',
+                              description: 'pleaseLoginFirst',
+                              buttonText: "login",
                               onPressed: () {
                                 Navigator.of(context,rootNavigator: true).pushAndRemoveUntil(PageTransition(child: SignInPage(), type: PageTransitionType.fade), (route) => false);
                               },
@@ -347,13 +347,14 @@ class _OrderPageState extends State<OrderPage> {
                             ),
                           );
                         }
+
                         else if (internetController.isOnline.value == false) {
                           return Center(
                             child: EmptyFailureNoInternetView(
                               image: 'assets/lottie/no_internet_lottie.json',
-                              title: 'Internet Error',
-                              description: 'Internet not found',
-                              buttonText: "Retry",
+                              title: 'internetError',
+                              description: 'internetNotFound',
+                              buttonText: "retry",
                               onPressed: () {
                                 controller.getData(true,status,date);
                               },
@@ -364,12 +365,12 @@ class _OrderPageState extends State<OrderPage> {
                           return Center(
                             child: EmptyFailureNoInternetView(
                               image: 'assets/lottie/no_internet_lottie.json',
-                              title: 'Internet Error',
-                              description: 'Internet not found',
-                              buttonText: "Retry",
+                              title: 'internetError',
+                              description: 'internetNotFound',
+                              buttonText: "retry",
                               onPressed: () {
                                 controller.getData(
-                                  true,status,date
+                                    true,status,date
                                 );
                               },
                               status: 1,
@@ -379,9 +380,9 @@ class _OrderPageState extends State<OrderPage> {
                           return Center(
                             child: EmptyFailureNoInternetView(
                               image: 'assets/lottie/failure_lottie.json',
-                              title: 'Server error',
-                              description: 'Please try again later',
-                              buttonText: "Retry",
+                              title: 'serverError',
+                              description: 'pleaseTryAgainLater',
+                              buttonText: "retry",
                               onPressed: () {
                                 controller.getData(true,status,date);
                               },
@@ -392,12 +393,12 @@ class _OrderPageState extends State<OrderPage> {
                           return Center(
                             child: EmptyFailureNoInternetView(
                               image: 'assets/lottie/failure_lottie.json',
-                              title: 'Something went wrong',
-                              description: 'Please try again later',
-                              buttonText: "Retry",
+                              title: 'somethingWentWrong',
+                              description: 'pleaseTryAgainLater',
+                              buttonText: "retry",
                               onPressed: () {
                                 controller.getData(
-                                  true,status,date
+                                    true,status,date
                                 );
                               },
                               status: 1,
@@ -407,9 +408,9 @@ class _OrderPageState extends State<OrderPage> {
                           return Center(
                             child: EmptyFailureNoInternetView(
                               image: 'assets/lottie/failure_lottie.json',
-                              title: 'Timeout',
-                              description: 'Please try again',
-                              buttonText: "Retry",
+                              title: 'timeout',
+                              description: 'pleaseTryAgain',
+                              buttonText: "retry",
                               onPressed: () {
                                 controller.getData(true,status,date);
                               },
@@ -423,141 +424,144 @@ class _OrderPageState extends State<OrderPage> {
                               Center(
                                 child: EmptyFailureNoInternetView(
                                   image: 'assets/lottie/empty_lottie.json',
-                                  title: 'No data',
-                                  description: 'No data found',
-                                  buttonText: "Retry",
+                                  title: 'noData',
+                                  description: 'noDataFound',
+                                  buttonText: "retry",
                                   onPressed: () {
                                     controller.getData(true,status,date);
                                   },
-                                  status: 0,
+                                  status: 1,
                                 ),
                               ),
                             ],
                           );
                         } else {
                           return ListView.separated(
-                              shrinkWrap: true,
-                              primary: false,
-                              physics: NeverScrollableScrollPhysics(),
-                              padding: EdgeInsets.zero,
-                              itemCount: controller.order.length,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 18, vertical: 6),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(20),
-                                      //color: Color(0xFFFAFAFF),
-                                      color: Colors.white,
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: Color(0xFFFAFAFF)
-                                                .withOpacity(0.2),
-                                            offset: Offset(0, 0),
-                                            blurRadius: 20)
-                                      ]),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "ID",
-                                            style: detailPageHeadingTextStyle1,
-                                          ),
-                                          Text(
-                                            "${controller.order[index].no}",
-                                            style: cartPageContactTextStyle,
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Product",
-                                            style: detailPageHeadingTextStyle1,
-                                          ),
-                                          Text(
-                                            "${controller.order[index].product!.title}",
-                                            style: cartPageContactTextStyle,
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Status",
-                                            style: detailPageHeadingTextStyle1,
-                                          ),
-                                          Text(
-                                            "${controller.order[index].status!.toUpperCase()}",
-                                            style: cartPageContactTextStyle,
-                                          )
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 5,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Total",
-                                            style: detailPageHeadingTextStyle1,
-                                          ),
-                                          // Text(
-                                          //   "${countJustFinalTotal9(controller.order[index],role,controller.order[index].deliveryCarge!)} ${accountcontroller.symbol.value}",
-                                          //   style: cartPageContactTextStyle,
-                                          // )
-                                          Text(
-                                            "${controller.order[index].price!} ${accountcontroller.symbol.value}",
-                                            style: cartPageContactTextStyle,
-                                          )
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            "Action",
-                                            style: detailPageHeadingTextStyle1,
-                                          ),
-                                          TextButton(
+                            shrinkWrap: true,
+                            primary: false,
+                            physics: NeverScrollableScrollPhysics(),
+                            padding: EdgeInsets.zero,
+                            itemCount: controller.order.length,
+                            itemBuilder: (context, index) {
+                              return Container(
+                                padding: EdgeInsets.symmetric(
+                                    horizontal: 18, vertical: 6),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    //color: Color(0xFFFAFAFF),
+                                    color: Colors.white,
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Color(0xFFFAFAFF)
+                                              .withOpacity(0.2),
+                                          offset: Offset(0, 0),
+                                          blurRadius: 20)
+                                    ]),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "id",
+                                          style: detailPageHeadingTextStyle1,
+                                        ).tr(),
+                                        Text(
+                                          "${controller.order[index].no}",
+                                          style: cartPageContactTextStyle,
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "product",
+                                          style: detailPageHeadingTextStyle1,
+                                        ).tr(),
+                                        Text(
+                                          "${controller.order[index].product!.title}",
+                                          style: cartPageContactTextStyle,
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "status",
+                                          style: detailPageHeadingTextStyle1,
+                                        ).tr(),
+                                        Text(
+                                          "${controller.order[index].status!.toUpperCase()}",
+                                          style: cartPageContactTextStyle,
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "total",
+                                          style: detailPageHeadingTextStyle1,
+                                        ).tr(),
+                                        // Text(
+                                        //   "${countJustFinalTotal9(controller.order[index],role,controller.order[index].deliveryCarge!)} ${accountcontroller.symbol.value}",
+                                        //   style: cartPageContactTextStyle,
+                                        // )
+                                        Text(
+                                          "${controller.order[index].price} ${accountcontroller.symbol.value}",
+                                          style: cartPageContactTextStyle,
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                          "action",
+                                          style: detailPageHeadingTextStyle1,
+                                        ).tr(),
+                                        TextButton(
                                             style: TextButton.styleFrom(
-                                              padding:EdgeInsets.zero
+                                                padding:EdgeInsets.zero
                                             ),
-                                              onPressed: (){
-                                            Navigator.of(context).push(
-                                                PageTransition(
-                                                    child: OrderDetailPage(
-                                                      id: controller
-                                                          .order[index].id
-                                                          .toString(),
-                                                    ),
-                                                    type: PageTransitionType
-                                                        .rightToLeft));
-                                          }, child: Text("See more"))
-                                        ],
-                                      ),
+                                            onPressed: (){
+                                              Navigator.of(context).push(
+                                                  PageTransition(
+                                                      child: OrderDetailPage(
+                                                        id: controller
+                                                            .order[index].id
+                                                            .toString(),
+                                                      ),
+                                                      type: PageTransitionType
+                                                          .rightToLeft));
+                                            }, child: Text("seeMore").tr())
+                                      ],
+                                    ),
 
-                                    ],
-                                  ),
-                                );
-                              }, separatorBuilder: (BuildContext context, int index) {
-                                return SizedBox(height: 15,);
+                                  ],
+                                ),
+                              );
+                            }, separatorBuilder: (BuildContext context, int index) {
+                            return SizedBox(height: 10,);
                           },);
                         }
                       }),

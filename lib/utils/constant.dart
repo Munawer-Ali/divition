@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:excel/excel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -205,7 +206,7 @@ String orderTime(String time){
 showToast(String message) {
   Fluttertoast.cancel();
   Fluttertoast.showToast(
-      msg: message,
+      msg: message.tr(),
       toastLength: Toast.LENGTH_SHORT,
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 1,
@@ -366,13 +367,13 @@ guestDialog(BuildContext context,String body) {
                   height: 20,
                 ),
                 Text(
-                  "Alart",
+                  "alert",
                   style: TextStyle(
                     fontSize: 20,
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
-                ),
+                ).tr(),
                 const SizedBox(
                   height: 20,
                 ),
@@ -382,7 +383,7 @@ guestDialog(BuildContext context,String body) {
                     fontSize: 18,
                     color: Colors.black,
                   ),
-                ),
+                ).tr(),
                 const SizedBox(
                   height: 10,
                 ),
@@ -393,7 +394,7 @@ guestDialog(BuildContext context,String body) {
                       onPressed: (){
                         Navigator.of(context,rootNavigator: true).pop();
                       },
-                      child: Text("Cancel",style: TextStyle(color: Colors.white,fontSize: 14),),
+                      child: Text("cancel",style: TextStyle(color: Colors.white,fontSize: 14),).tr(),
                       style: ElevatedButton.styleFrom(
                           primary: Color(0xFF262324)
                       ),
@@ -408,7 +409,7 @@ guestDialog(BuildContext context,String body) {
                           Navigator.of(context,rootNavigator: true).pop();
                           Navigator.of(context,rootNavigator: true).pushAndRemoveUntil(PageTransition(child: SignInPage(), type: PageTransitionType.fade), (route) => false);
                         },
-                        child: Text("Login",style: TextStyle(color: Colors.white,fontSize: 14),)),
+                        child: Text("login",style: TextStyle(color: Colors.white,fontSize: 14),).tr()),
                     ),
                   ],
                 ),

@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,8 +34,8 @@ class MyOrderPage extends StatefulWidget {
 }
 
 class _OrderPageState extends State<MyOrderPage> {
-  var list = ["All Order", "Completed", "Canceled","Pending"];
-  var dropDownValue = "All Order";
+  var list = ["allOrder", "Completed", "Canceled","Pending"];
+  var dropDownValue = "allOrder";
   int toggle = 0;
   var tap;
   bool isTap = false;
@@ -138,9 +139,9 @@ class _OrderPageState extends State<MyOrderPage> {
                         children: [
                           SizedBox(height: 20,width: 10,),
                           Text(
-                            "Orders",
+                            "orders",
                             style: productPageTitleTextStyle,
-                          ),
+                          ).tr(),
                           PopupMenuButton(
                               icon: Image.asset("assets/images/upload.png"),
                               itemBuilder: (context){
@@ -165,7 +166,7 @@ class _OrderPageState extends State<MyOrderPage> {
                                           // sized box with width 10
                                           width: 10,
                                         ),
-                                        Text("Export PDF")
+                                        Text("exportPdf").tr()
                                       ],
                                     ),
                                   ),
@@ -192,7 +193,7 @@ class _OrderPageState extends State<MyOrderPage> {
                                           // sized box with width 10
                                           width: 10,
                                         ),
-                                        Text("Export Excel")
+                                        Text("exportExcel").tr()
                                       ],
                                     ),
                                   ),
@@ -210,7 +211,7 @@ class _OrderPageState extends State<MyOrderPage> {
                           GestureDetector(
                             onTap: (){
                               _selectDate(context).then((value) {
-                                dropDownValue = "All Order";
+                                dropDownValue = "allOrder";
                                 setState((){});
                                 date="from=$formattedDate&to=$formattedDate1";
                                 controller.getData(true, "", date);
@@ -241,13 +242,13 @@ class _OrderPageState extends State<MyOrderPage> {
                             ),
                           ),
                           Text(
-                            "To",
+                            "to",
                             style: cartPageContactTextStyle,
-                          ),
+                          ).tr(),
                           GestureDetector(
                             onTap: (){
                               _selectDate1(context).then((value) {
-                                dropDownValue = "All Order";
+                                dropDownValue = "allOrder";
                                 setState((){});
                                 date="from=$formattedDate&to=$formattedDate1";
                                 controller.getData(true, "", date);
@@ -286,14 +287,14 @@ class _OrderPageState extends State<MyOrderPage> {
                               value: dropDownValue,
                               items: list
                                   .map((e) => DropdownMenuItem(
-                                child: Text(e),
+                                child: Text(e,style: TextStyle(color: Colors.black),).tr(),
                                 value: e,
                               ))
                                   .toList(),
                               onChanged: (value) {
                                 setState(() {
                                   dropDownValue = value as String;
-                                  if(dropDownValue=="All Order"){
+                                  if(dropDownValue=="allOrder"){
 
                                     controller.getData(true, "", "");
                                   }else{
@@ -322,9 +323,9 @@ class _OrderPageState extends State<MyOrderPage> {
                           return Center(
                             child: EmptyFailureNoInternetView(
                               image: 'assets/lottie/login.json',
-                              title: 'Alert',
-                              description: 'Please login first',
-                              buttonText: "Login",
+                              title: 'alert',
+                              description: 'pleaseLoginFirst',
+                              buttonText: "login",
                               onPressed: () {
                                 Navigator.of(context,rootNavigator: true).pushAndRemoveUntil(PageTransition(child: SignInPage(), type: PageTransitionType.fade), (route) => false);
                               },
@@ -337,9 +338,9 @@ class _OrderPageState extends State<MyOrderPage> {
                           return Center(
                             child: EmptyFailureNoInternetView(
                               image: 'assets/lottie/no_internet_lottie.json',
-                              title: 'Internet Error',
-                              description: 'Internet not found',
-                              buttonText: "Retry",
+                              title: 'internetError',
+                              description: 'internetNotFound',
+                              buttonText: "retry",
                               onPressed: () {
                                 controller.getData(true,status,date);
                               },
@@ -350,9 +351,9 @@ class _OrderPageState extends State<MyOrderPage> {
                           return Center(
                             child: EmptyFailureNoInternetView(
                               image: 'assets/lottie/no_internet_lottie.json',
-                              title: 'Internet Error',
-                              description: 'Internet not found',
-                              buttonText: "Retry",
+                              title: 'internetError',
+                              description: 'internetNotFound',
+                              buttonText: "retry",
                               onPressed: () {
                                 controller.getData(
                                     true,status,date
@@ -365,9 +366,9 @@ class _OrderPageState extends State<MyOrderPage> {
                           return Center(
                             child: EmptyFailureNoInternetView(
                               image: 'assets/lottie/failure_lottie.json',
-                              title: 'Server error',
-                              description: 'Please try again later',
-                              buttonText: "Retry",
+                              title: 'serverError',
+                              description: 'pleaseTryAgainLater',
+                              buttonText: "retry",
                               onPressed: () {
                                 controller.getData(true,status,date);
                               },
@@ -378,9 +379,9 @@ class _OrderPageState extends State<MyOrderPage> {
                           return Center(
                             child: EmptyFailureNoInternetView(
                               image: 'assets/lottie/failure_lottie.json',
-                              title: 'Something went wrong',
-                              description: 'Please try again later',
-                              buttonText: "Retry",
+                              title: 'somethingWentWrong',
+                              description: 'pleaseTryAgainLater',
+                              buttonText: "retry",
                               onPressed: () {
                                 controller.getData(
                                     true,status,date
@@ -393,9 +394,9 @@ class _OrderPageState extends State<MyOrderPage> {
                           return Center(
                             child: EmptyFailureNoInternetView(
                               image: 'assets/lottie/failure_lottie.json',
-                              title: 'Timeout',
-                              description: 'Please try again',
-                              buttonText: "Retry",
+                              title: 'timeout',
+                              description: 'pleaseTryAgain',
+                              buttonText: "retry",
                               onPressed: () {
                                 controller.getData(true,status,date);
                               },
@@ -409,9 +410,9 @@ class _OrderPageState extends State<MyOrderPage> {
                               Center(
                                 child: EmptyFailureNoInternetView(
                                   image: 'assets/lottie/empty_lottie.json',
-                                  title: 'No data!',
-                                  description: 'No data found',
-                                  buttonText: "Retry",
+                                  title: 'noData',
+                                  description: 'noDataFound',
+                                  buttonText: "retry",
                                   onPressed: () {
                                     controller.getData(true,status,date);
                                   },
@@ -449,9 +450,9 @@ class _OrderPageState extends State<MyOrderPage> {
                                       MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "ID",
+                                          "id",
                                           style: detailPageHeadingTextStyle1,
-                                        ),
+                                        ).tr(),
                                         Text(
                                           "${controller.order[index].no}",
                                           style: cartPageContactTextStyle,
@@ -466,9 +467,9 @@ class _OrderPageState extends State<MyOrderPage> {
                                       MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Product",
+                                          "product",
                                           style: detailPageHeadingTextStyle1,
-                                        ),
+                                        ).tr(),
                                         Text(
                                           "${controller.order[index].product!.title}",
                                           style: cartPageContactTextStyle,
@@ -483,9 +484,9 @@ class _OrderPageState extends State<MyOrderPage> {
                                       MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Status",
+                                          "status",
                                           style: detailPageHeadingTextStyle1,
-                                        ),
+                                        ).tr(),
                                         Text(
                                           "${controller.order[index].status!.toUpperCase()}",
                                           style: cartPageContactTextStyle,
@@ -500,9 +501,9 @@ class _OrderPageState extends State<MyOrderPage> {
                                       MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Total",
+                                          "total",
                                           style: detailPageHeadingTextStyle1,
-                                        ),
+                                        ).tr(),
                                         // Text(
                                         //   "${countJustFinalTotal9(controller.order[index],role,controller.order[index].deliveryCarge!)} ${accountcontroller.symbol.value}",
                                         //   style: cartPageContactTextStyle,
@@ -521,9 +522,9 @@ class _OrderPageState extends State<MyOrderPage> {
                                       MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          "Action",
+                                          "action",
                                           style: detailPageHeadingTextStyle1,
-                                        ),
+                                        ).tr(),
                                         TextButton(
                                             style: TextButton.styleFrom(
                                                 padding:EdgeInsets.zero
@@ -538,7 +539,7 @@ class _OrderPageState extends State<MyOrderPage> {
                                                       ),
                                                       type: PageTransitionType
                                                           .rightToLeft));
-                                            }, child: Text("See more"))
+                                            }, child: Text("seeMore").tr())
                                       ],
                                     ),
 

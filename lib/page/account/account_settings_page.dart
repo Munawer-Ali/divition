@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -98,9 +99,9 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                   return Center(
                     child: EmptyFailureNoInternetView(
                       image: 'assets/lottie/login.json',
-                      title: 'Alert',
-                      description: 'Please login first',
-                      buttonText: "Login",
+                      title: 'alert',
+                      description: 'pleaseLoginFirst',
+                      buttonText: "login",
                       onPressed: () {
                         Navigator.of(context,rootNavigator: true).pushAndRemoveUntil(PageTransition(child: SignInPage(), type: PageTransitionType.fade), (route) => false);
                       },
@@ -112,9 +113,9 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                   return Center(
                     child: EmptyFailureNoInternetView(
                       image: 'assets/lottie/no_internet_lottie.json',
-                      title: 'Internet Error',
-                      description: 'Internet not found',
-                      buttonText: "Retry",
+                      title: 'internetError',
+                      description: 'internetNotFound',
+                      buttonText: "retry",
                       onPressed: () {
                         controller.getData(true);
                       },
@@ -125,9 +126,9 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                   return Center(
                     child: EmptyFailureNoInternetView(
                       image: 'assets/lottie/no_internet_lottie.json',
-                      title: 'Internet Error',
-                      description: 'Internet not found',
-                      buttonText: "Retry",
+                      title: 'internetError',
+                      description: 'internetNotFound',
+                      buttonText: "retry",
                       onPressed: () {
                         controller.getData(true,);
                       },
@@ -138,9 +139,9 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                   return Center(
                     child: EmptyFailureNoInternetView(
                       image: 'assets/lottie/failure_lottie.json',
-                      title: 'Server error'.tr,
-                      description: 'Please try again later',
-                      buttonText: "Retry",
+                      title: 'serverError',
+                      description: 'pleaseTryAgainLater',
+                      buttonText: "retry",
                       onPressed: () {
                         controller.getData(true);
                       },
@@ -151,9 +152,9 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                   return Center(
                     child: EmptyFailureNoInternetView(
                       image: 'assets/lottie/failure_lottie.json',
-                      title: 'Something went wrong',
-                      description: 'Please try again later',
-                      buttonText: "Retry",
+                      title: 'somethingWentWrong',
+                      description: 'pleaseTryAgainLater',
+                      buttonText: "retry",
                       onPressed: () {
                         controller.getData(true,);
                       },
@@ -164,9 +165,9 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                   return Center(
                     child: EmptyFailureNoInternetView(
                       image: 'assets/lottie/failure_lottie.json',
-                      title: 'Timeout',
-                      description: 'Please try again',
-                      buttonText: "Retry",
+                      title: 'timeout',
+                      description: 'pleaseTryAgain',
+                      buttonText: "retry",
                       onPressed: () {
                         controller.getData(true);
                         },
@@ -191,12 +192,12 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                               onPressed: (){
                                 Navigator.of(context).pop();
                               },):SizedBox(height: 20,width: 20,),
-                            Text("Account settings",style: productPageTitleTextStyle,),
+                            Text("accountSettings",style: productPageTitleTextStyle,).tr(),
                             SizedBox(height: 20,width: 50,)
                           ],
                         ),
                         SizedBox(height: 20,),
-                        Text("Personal Info",style: confirmPageHeadingTextStyle,),
+                        Text("personalInfo",style: confirmPageHeadingTextStyle,).tr(),
                         SizedBox(height: 10,),
                         Container(
                           padding: EdgeInsets.only(left: 10,right: 10,top: 20,bottom: 20),
@@ -270,7 +271,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                                       borderRadius: BorderRadius.circular(10),
                                       border: Border.all(color: Colors.grey)
                                     ),
-                                      child: Text("Change Password",style: productListPriceTextStyle,)),
+                                      child: Text("changePassword",style: productListPriceTextStyle,).tr()),
                                 )
                               ],
                             ),
@@ -279,7 +280,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                         SizedBox(height: 25,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Text("First name",style: formFieldTitleStyle,),
+                          child: Text("firstName",style: formFieldTitleStyle,).tr(),
                         ),
                         SizedBox(height: 4,),
                         Container(
@@ -308,7 +309,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                         SizedBox(height: 13,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Text("Last name",style: formFieldTitleStyle,),
+                          child: Text("lastName",style: formFieldTitleStyle,).tr(),
                         ),
                         SizedBox(height: 4,),
                         SizedBox(height: 40,child: TextFormField(
@@ -329,7 +330,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
 
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Text("Mobile number",style: formFieldTitleStyle,),
+                          child: Text("mobileNumber",style: formFieldTitleStyle,).tr(),
                         ),
                         SizedBox(height: 4,),
                         SizedBox(height: 40,child: TextFormField(
@@ -349,7 +350,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                         ),),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Text("Email address",style: formFieldTitleStyle,),
+                          child: Text("emailAddress",style: formFieldTitleStyle,).tr(),
                         ),
                         SizedBox(height: 4,),
                         SizedBox(height: 40,child: TextFormField(
@@ -371,7 +372,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                         SizedBox(height: 13,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Text("Country",style: formFieldTitleStyle,),
+                          child: Text("country",style: formFieldTitleStyle,).tr(),
                         ),
                         SizedBox(height: 4,),
                         SizedBox(height: 40,
@@ -405,7 +406,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                         SizedBox(height: 13,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Text("City",style: formFieldTitleStyle,),
+                          child: Text("city",style: formFieldTitleStyle,).tr(),
                         ),
                         SizedBox(height: 4,),
                         SizedBox(height: 40,
@@ -439,7 +440,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                         SizedBox(height: 13,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Text("Store",style: formFieldTitleStyle,),
+                          child: Text("store",style: formFieldTitleStyle,).tr(),
                         ),
                         SizedBox(height: 4,),
                         SizedBox(height: 40,child: TextFormField(
@@ -460,7 +461,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                         SizedBox(height: 13,),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
-                          child: Text("Two Factor",style: formFieldTitleStyle,),
+                          child: Text("twoFactor",style: formFieldTitleStyle,).tr(),
                         ),
                         SizedBox(height: 4,),
                         Row(
@@ -473,7 +474,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                                   setState((){
                                     controller.twoFactor.value=val as int;
                                   });
-                              },title: Text("Enabled",style: productListPriceTextStyle,),),
+                              },title: Text("enabled",style: productListPriceTextStyle,).tr(),),
                             ),
                             Expanded(
                               child: RadioListTile(
@@ -482,7 +483,7 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                                 setState((){
                                   controller.twoFactor.value=val as int;
                                 });
-                              },title: Text("Disabled",style: productListPriceTextStyle,),),
+                              },title: Text("disabled",style: productListPriceTextStyle,).tr(),),
                             )
                           ],
                         ),
@@ -515,9 +516,9 @@ class _AccountSettingsPageState extends State<AccountSettingsPage> {
                               }
                             },
                             child: Text(
-                              "Update",
+                              "update",
                               style: detailPageButtonTextStyle,
-                            ),
+                            ).tr(),
                           ),
                         ),
                         SizedBox(height: 40,),

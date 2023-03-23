@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -79,8 +80,8 @@ class _HomePageState extends State<HomePage> {
 
                       children: [
                         SizedBox(height: 20,),
-                        Text("DIVISION",style: homeTitleTextStyle,),
-                        Text("Digital Virtual Station",style: homeDescriptionTextStyle,)
+                        Text("division",style: homeTitleTextStyle,).tr(),
+                        Text("digitalVirtualStation",style: homeDescriptionTextStyle,).tr()
                       ],
                     ),
                     Expanded(child: Image.asset("assets/images/fighter.png",width: MediaQuery.of(context).size.width*0.5,)),
@@ -119,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   SvgPicture.asset("assets/images/search.svg"),
                   SizedBox(width: 3,),
-                  Text("Search",style: TextStyle(fontSize: 13),)
+                  Text("search",style: TextStyle(fontSize: 13),).tr()
                 ],
               ),
             ),
@@ -131,7 +132,6 @@ class _HomePageState extends State<HomePage> {
         Expanded(
           child: Obx((){
             if(controller.loading.value==true){
-
               return Center(
                 child: SpinKitCircle(
                   size: 140,
@@ -143,9 +143,9 @@ class _HomePageState extends State<HomePage> {
               return Center(
                 child: EmptyFailureNoInternetView(
                   image: 'assets/lottie/no_internet_lottie.json',
-                  title: 'Internet Error',
-                  description: 'Internet not found',
-                  buttonText: "Retry",
+                  title: 'internetError',
+                  description: 'internetNotFound',
+                  buttonText: "retry",
                   onPressed: () {
                     controller.getData(true);
                   },
@@ -156,9 +156,9 @@ class _HomePageState extends State<HomePage> {
               return Center(
                 child: EmptyFailureNoInternetView(
                   image: 'assets/lottie/no_internet_lottie.json',
-                  title: 'Internet Error',
-                  description: 'Internet not found',
-                  buttonText: "Retry",
+                  title: 'internetError',
+                  description: 'internetNotFound',
+                  buttonText: "retry",
                   onPressed: () {
                     controller.getData(true,);
                   },
@@ -169,9 +169,9 @@ class _HomePageState extends State<HomePage> {
               return Center(
                 child: EmptyFailureNoInternetView(
                   image: 'assets/lottie/failure_lottie.json',
-                  title: 'Server error'.tr,
-                  description: 'Please try again later',
-                  buttonText: "Retry",
+                  title: 'serverError',
+                  description: 'pleaseTryAgainLater',
+                  buttonText: "retry",
                   onPressed: () {
                     controller.getData(true);
                   },
@@ -182,9 +182,9 @@ class _HomePageState extends State<HomePage> {
               return Center(
                 child: EmptyFailureNoInternetView(
                   image: 'assets/lottie/failure_lottie.json',
-                  title: 'Something went wrong',
-                  description: 'Please try again later',
-                  buttonText: "Retry",
+                  title: 'somethingWentWrong',
+                  description: 'pleaseTryAgainLater',
+                  buttonText: "retry",
                   onPressed: () {
                     controller.getData(true,);
                   },
@@ -195,9 +195,9 @@ class _HomePageState extends State<HomePage> {
               return Center(
                 child: EmptyFailureNoInternetView(
                   image: 'assets/lottie/failure_lottie.json',
-                  title: 'Timeout',
-                  description: 'Please try again',
-                  buttonText: "Retry",
+                  title: 'timeout',
+                  description: 'pleaseTryAgain',
+                  buttonText: "retry",
                   onPressed: () {
                     controller.getData(true);
                   },
@@ -205,6 +205,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               );
             }
+
             else{
               return RefreshIndicator(
                 onRefresh: ()async{

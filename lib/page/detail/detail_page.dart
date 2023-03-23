@@ -5,6 +5,7 @@ import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -109,9 +110,9 @@ class _DetailPageState extends State<DetailPage>{
                         },
                       ),
                       Text(
-                        "Details",
+                        "details",
                         style: productPageTitleTextStyle,
-                      ),
+                      ).tr(),
                       SizedBox(
                         height: 20,
                         width: 50,
@@ -193,9 +194,9 @@ class _DetailPageState extends State<DetailPage>{
                             height: 30,
                             child: Center(
                               child: Text(
-                                "Description",
+                                "description",
                                 style: detailPageDescTextStyle,
-                              ),
+                              ).tr(),
                             ),
                             decoration: BoxDecoration(
                                 color: Color(0xFF15375A),
@@ -204,11 +205,7 @@ class _DetailPageState extends State<DetailPage>{
                           SizedBox(
                             height: 10,
                           ),
-                          Html(data: widget.categoryList.description!,style: {
-                            '#': Style(
-                              fontSize: FontSize(12),
-                            ),
-                          },),
+                          Html(data: widget.categoryList.description!),
 
                           SizedBox(
                             height: 30,
@@ -306,7 +303,7 @@ class _DetailPageState extends State<DetailPage>{
                         widget.categoryList.category!.type=="top-up-jawaker"||
                         widget.categoryList.category!.type=="top-up-no-api"?Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 5),
-                      child: Text("Player ID",style: formFieldTitleStyle,),
+                      child: Text("playerId".toString().replaceAll(":", ""),style: formFieldTitleStyle,).tr(),
                     ):SizedBox(),
                     widget.categoryList.category!.type=="top-up"||
                         widget.categoryList.category!.type=="top-up-jawaker"||
@@ -342,7 +339,9 @@ class _DetailPageState extends State<DetailPage>{
                       height: 18,
                     ),
                     widget.categoryList.category!.type=="top-up"||
-                        widget.categoryList.category!.type=="top-up-jawaker" ?Text("Player name: $name",style: TextStyle(fontSize: 14),):SizedBox(),
+                        widget.categoryList.category!.type=="top-up-jawaker" ?Text("playerNameName",style: TextStyle(fontSize: 14,color: Colors.black),).tr( namedArgs: {
+                      "name": name
+                    }):SizedBox(),
                     SizedBox(height: 10,),
 
                     widget.categoryList.category!.type=="top-up"||
@@ -360,7 +359,7 @@ class _DetailPageState extends State<DetailPage>{
                                 ),
                                 onPressed: ()async{
                                   if(playerController.text.isEmpty){
-                                    showToast("Please enter player id");
+                                    showToast("pleaseEnterPlayerId").tr();
                                     return;
                                   }
                                   setState((){
@@ -379,6 +378,7 @@ class _DetailPageState extends State<DetailPage>{
 
                                     var data=jsonDecode(response.body);
                                     var name1=data['palyer_name'];
+                                    print(name1);
                                     if(name1=="Not found"){
                                       setState((){
                                         name=name1;
@@ -401,7 +401,7 @@ class _DetailPageState extends State<DetailPage>{
                                     }
 
                                   }else{
-                                    showToast("Something wrong. Please try again");
+                                    showToast("somethingWrongPleaseTryAgain").tr();
                                   }
 
 
@@ -423,20 +423,20 @@ class _DetailPageState extends State<DetailPage>{
                                       borderRadius: BorderRadius.circular(10))),
                               onPressed: buyNowEnabled?() async{
                                 if(accountcontroller.token.value.isEmpty){
-                                  guestDialog(context, "You must have to login first to buy this product");
+                                  guestDialog(context, "youMustHaveToLoginFirstToBuyThisProduct").tr();
                                   return;
                                 }
                                 if(playerController.text.isEmpty){
-                                  showToast("Please enter player ID");
+                                  showToast("pleaseEnterPlayerId").tr();
                                   return;
                                 }
                                 if(initial_count.toString().isEmpty){
-                                  showToast("Cart quantity cannot be empty");
+                                  showToast("cartQuantityCannotBeEmpty").tr();
                                   return;
                                 }
 
                                 if(initial_count==0){
-                                  showToast("Cart quantity cannot be 0");
+                                  showToast("cartQuantityCannotBe0").tr();
                                   return;
                                 }
                                 LoadingProgress.start(context);
@@ -456,9 +456,9 @@ class _DetailPageState extends State<DetailPage>{
 
                               }:null,
                               child: Text(
-                                "Buy Now",
+                                "buyNow",
                                 style: detailPageButtonTextStyle,
-                              ),
+                              ).tr(),
                             ),
                           ),
 
@@ -474,23 +474,23 @@ class _DetailPageState extends State<DetailPage>{
                         onPressed: () async{
 
                           if(accountcontroller.token.value.isEmpty){
-                            guestDialog(context, "You must have to login first to buy this product");
+                            guestDialog(context, "youMustHaveToLoginFirstToBuyThisProduct").tr();
                             return;
                           }
                           if(widget.categoryList.category!.type=="top-up"&&playerController.text.isEmpty){
-                            showToast("Please enter player ID");
+                            showToast("pleaseEnterPlayerId").tr();
                             return;
                           }
                           if(widget.categoryList.category!.type=="top-up-no-api"&&playerController.text.isEmpty){
-                            showToast("Please enter player ID");
+                            showToast("pleaseEnterPlayerId").tr();
                             return;
                           }
                           if(initial_count.toString().isEmpty){
-                            showToast("Cart quantity cannot be empty");
+                            showToast("cartQuantityCannotBeEmpty").tr();
                             return;
                           }
                           if(initial_count==0){
-                            showToast("Cart quantity cannot be 0");
+                            showToast("cartQuantityCannotBe0").tr();
                             return;
                           }
                          LoadingProgress.start(context);
@@ -511,9 +511,9 @@ class _DetailPageState extends State<DetailPage>{
 
                         },
                         child: Text(
-                          "Buy Now",
+                          "buyNow",
                           style: detailPageButtonTextStyle,
-                        ),
+                        ).tr(),
                       ),
                     ),
                     SizedBox(height: 40,)
