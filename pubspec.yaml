@@ -12,37 +12,38 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.2
-  flutter_screenutil: ^5.4.0+1
-  get: any
-  http: any
-  flutter_svg: any
-  fluttertoast: any
-  flutter_staggered_grid_view: ^0.4.1
-  connectivity_plus: any
-  shared_preferences: any
-  flutter_html: ^2.2.1
-  image_picker: ^0.8.5+3
-  image_cropper: ^2.0.3
-  dio: any
-  cached_network_image: any
-  intl: any
-  url_launcher: any
-  lottie: any
-  excel: any
-  open_filex: ^4.3.2
-  path_provider: any
-  path: any
-  pdf: any
-  firebase_core: any
-  firebase_messaging: any
-  flutter_local_notifications: any
-  flutter_spinkit: any
-  loading_progress: any
-  permission_handler: any
-  flutter_pdfview: any
-  flutter_inappwebview: any
-  rxdart: any
+  cupertino_icons:
+  flutter_screenutil:
+  get:
+  http:
+  flutter_svg:
+  fluttertoast:
+  flutter_staggered_grid_view: ^0.4.0
+  connectivity_plus:
+  shared_preferences:
+  flutter_html:
+  image_picker:
+  image_cropper:
+  dio:
+  cached_network_image:
+  intl:
+  url_launcher:
+  lottie:
+  excel:
+  open_filex:
+  path_provider:
+  path:
+  pdf:
+  firebase_core:
+  firebase_messaging:
+  flutter_local_notifications: ^9.7.0
+  flutter_spinkit:
+  loading_progress:
+  permission_handler:
+  flutter_pdfview:
+  flutter_inappwebview:
+  rxdart:
+  easy_localization: ^3.0.0
 
 dev_dependencies:
   flutter_test:
@@ -62,8 +63,8 @@ flutter:
 
   uses-material-design: true
   assets:
-   - assets/images/
-   - assets/lottie/
+    - assets/images/
+    - assets/lottie/
   fonts:
     - family: Gotham
       fonts:
